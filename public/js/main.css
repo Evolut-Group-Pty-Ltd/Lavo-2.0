@@ -1,0 +1,19 @@
+.loading .scene {
+	width: 514px;
+}
+
+@media (max-width: 767px) {
+	.loading .scene {
+		width: 260px;
+	}
+}
+@media (max-width: 900px) and (orientation: landscape){
+	.loading .scene {
+		width: 260px;
+	}
+}
+@media (max-width: 350px) {
+	.loading .scene {
+		width: 230px;
+	}
+}
