@@ -1,4 +1,4 @@
-//Hello PJ --- Note !!
+//Hello  --- Note !!
 //text param for text that placed after image
 //caption param for text that placed below the image
 //link param for button that placed below the image and it's href
@@ -17,23 +17,23 @@ export const videoType3D = {
 
 const assetData = {
   step1: {
-    "image0.jpg": {
-      text: [],
-      caption: "Cityscape, Shanghai",
+    "hyd.png": {
+      text: ["Its fuel has taken us to","the moon."],
+      caption: "",
       link: "",
-      copyRight: "© Katherine Gu",
+      copyRight: "",
     },
-    "image1.jpg": {
-      text: [],
-      caption: "Aerial view, Shanghai",
+    "globe2.png": {
+      text: ["Hydrogen is the most","abundant element in the","universe."],
+      caption: "",
       link: "",
-      copyRight: "© Ansonmaio",
+      copyRight: "",
     },
-    "empty0.png": {
-      text: ["Empower", "Tomorrow"],
-      caption: "Huangpu River, Shanghai",
+    "globe1.png": {
+      text: ["Here on Earth, it doesn't", "appear pure in nature."],
+      caption: "more info here",
       link: "",
-      copyRight: "© Derek Lee",
+      copyRight: "",
     },
   },
 };

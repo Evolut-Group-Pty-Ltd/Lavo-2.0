@@ -54,7 +54,8 @@ export default class LoaderManager {
         let fonts = [
             //'fonts/suisse.json',
             'fonts/TimesNewRomanPSMT.json',
-            'fonts/Mont Heavy DEMO_Regular.json',
+            'fonts/AvenirNext-DemiBold.json',
+            'fonts/AvenirNext-MediumItalic.json',
             //'fonts/HelveticaNeue.json'
             //'fonts/HelveticaNeue_Medium.json'
             //'fonts/Metropolis_Regular.json'
@@ -63,7 +64,7 @@ export default class LoaderManager {
         for( let i = 0; i < fonts.length; i++ ) {
             assetLoadPromises.push( new Promise( resolve => fontLoader.load( fonts[i], font => {
                 this.assets.fonts[ font.data.familyName ] = font;
-                console.log("ffon",font)
+                console.log("Sd", this.assets.fonts)
                 resolve() 
             } ) ) )
         }

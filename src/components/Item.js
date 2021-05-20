@@ -151,7 +151,7 @@ export default class Item extends THREE.Group {
         if(this.data.caption === '') return
 
         let textGeom = new THREE.TextGeometry( this.data.caption, {
-            font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+            font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
             size: 24,
             height: 0,
             curveSegments: 4
@@ -171,7 +171,7 @@ export default class Item extends THREE.Group {
             let text = this.data.text[i];
 
             let textGeom = new THREE.TextGeometry( text, {
-                font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+                font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
                 size: 24,
                 height: 0,
                 curveSegments: 4
@@ -218,7 +218,7 @@ export default class Item extends THREE.Group {
         
         if( this.data.caption !== '' ) {
             let captionGeom = new THREE.TextGeometry( this.data.caption, {
-                font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+                font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
                 size: 12,
                 height: 0,
                 curveSegments: 6
@@ -232,7 +232,7 @@ export default class Item extends THREE.Group {
         //
         if( this.data.copyRight && this.data.copyRight !== '' ) {
             let copyRightGeom = new THREE.TextGeometry( this.data.copyRight, {
-                font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+                font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
                 size: 12,
                 height: 0,
                 curveSegments: 6

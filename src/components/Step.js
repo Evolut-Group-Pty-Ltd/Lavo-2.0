@@ -24,7 +24,7 @@ export default class Step extends THREE.Group {
             let text = nameArr[i];
 
             let textGeom = new THREE.TextGeometry( text, {
-                font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+                font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
                 size: 130,
                 height: 0,
                 curveSegments: 10
@@ -46,7 +46,7 @@ export default class Step extends THREE.Group {
             let text = main.into.title[i];
 
             let textGeom = new THREE.TextGeometry( text, {
-                font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+                font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
                 size: 28,
                 height: 0,
                 curveSegments: 4
@@ -69,7 +69,7 @@ export default class Step extends THREE.Group {
             let text = main.end.title[i];
 
             let textGeom = new THREE.TextGeometry( text, {
-                font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+                font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
                 size: 34,
                 height: 0,
                 curveSegments: 4
@@ -102,7 +102,7 @@ export default class Step extends THREE.Group {
         this.visible = false
 
         let sansTextGeom = new THREE.TextGeometry( 'SEE YOU NEXT TIME', {
-            font: this.mainSpace.assets.fonts['HelveticaNeue'],
+            font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
             size: 10,
             height: 0,
             curveSegments: 4
@@ -113,7 +113,7 @@ export default class Step extends THREE.Group {
         this.add( sansText )
 
         let lineOneGeom = new THREE.TextGeometry( "We're looking for new talents and exciting projects", {
-            font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+            font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
             size: 30,
             height: 0,
             curveSegments: 6
@@ -124,7 +124,7 @@ export default class Step extends THREE.Group {
         this.add( lineOne )
 
         let lineTwoGeom = new THREE.TextGeometry( "to make 2019 a memorable one.", {
-            font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+            font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
             size: 30,
             height: 0,
             curveSegments: 6
@@ -135,7 +135,7 @@ export default class Step extends THREE.Group {
         this.add( lineTwo )
 
         let emailGeom = new THREE.TextGeometry( "hello@mallardandclaret.com", {
-            font: this.mainSpace.assets.fonts['Mont Heavy DEMO'],
+            font: this.mainSpace.assets.fonts['TimesNewRomanPSMT'],
             size: 36,
             height: 0,
             curveSegments: 6
@@ -201,19 +201,19 @@ export default class Step extends THREE.Group {
         linkGroup.add( this.linkBox )
         this.add( linkGroup )
 
-        this.endButton = new THREE.Group()
-        let borderTexture = new THREE.TextureLoader().load( 'assets/end.png' )
-            borderTexture.magFilter = borderTexture.minFilter = THREE.LinearFilter
-        let borderMaterial = new THREE.MeshBasicMaterial( { map: borderTexture, transparent: true, depthWrite: false } )
-        let borderGeom = new THREE.PlaneGeometry( 1, 1 )
-        this.border = new THREE.Mesh( borderGeom, borderMaterial )
-        this.border.scale.set( 1664/8, 393/8, 1 )
-        this.endButton.add( this.border )
+        // this.endButton = new THREE.Group()
+        // let borderTexture = new THREE.TextureLoader().load( 'assets/end.png' )
+        //     borderTexture.magFilter = borderTexture.minFilter = THREE.LinearFilter
+        // let borderMaterial = new THREE.MeshBasicMaterial( { map: borderTexture, transparent: true, depthWrite: false } )
+        // let borderGeom = new THREE.PlaneGeometry( 1, 1 )
+        // this.border = new THREE.Mesh( borderGeom, borderMaterial )
+        // this.border.scale.set( 1664/8, 393/8, 1 )
+        // this.endButton.add( this.border )
 
-        this.endButton.position.set( 0, -200, 50 )
-        this.endButton.add( linkGroup )
+        // this.endButton.position.set( 0, -200, 50 )
+        // this.endButton.add( linkGroup )
 
-        this.add( this.endButton )
+        // this.add( this.endButton )
 
     }
 

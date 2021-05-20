@@ -18,8 +18,8 @@ export const TextureTypeEnum ={
 
 
 export const sceneOptions ={
-    xPovit:350,
-    yPovit:380,
+    xPovit:150,
+    yPovit:180,
 }
 
 export const gridOptions ={
