@@ -9,7 +9,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 module.exports = {
     entry: [ '@babel/polyfill', './src/main.js' ],
     output: {
-        path: path.resolve(__dirname, 'public/js'),
+        path: path.resolve(__dirname, 'docs/js'),
         publicPath: '/js/',
         filename: 'main.js'
     },
@@ -84,7 +84,7 @@ module.exports = {
     ],
     devServer: {
         hot: true, // Tell the dev-server we're using HMR
-        contentBase: path.resolve(__dirname, 'public'),
+        contentBase: path.resolve(__dirname, 'docs'),
         publicPath: '/js/'
     },
     devtool: 'cheap-eval-source-map',
