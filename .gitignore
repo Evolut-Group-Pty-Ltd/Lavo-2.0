@@ -1,3 +1,5 @@
 node_modules
 .ds_store
 **.zip
+.idea
+package-lock.json
