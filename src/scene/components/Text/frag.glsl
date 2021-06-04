@@ -22,7 +22,7 @@ void main() {
   float dsd = fwidth(sd);
   float alpha = smoothstep(-dsd, dsd, sd);
 
-  if (alpha < .01) discard;
+  if (alpha < .003) discard;
 
   gl_FragColor = vec4(color, alpha * opacity);
 

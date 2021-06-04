@@ -2,9 +2,9 @@ import vertexShader from './vert.glsl'
 import fragmentShader from './frag.glsl'
 
 import { RawShaderMaterial, Color, Mesh, Vector3 } from "three"
-import { rescale, smoothstep } from "../../util/interpolations"
+import { smoothstep, hold } from "../../util/interpolations"
 import { Global } from "../../Global"
-import { TextGeometry } from '../../util/BMFontText'
+import { TextGeometry } from './BMFontText'
 
 const buffer = new Vector3()
 
@@ -15,7 +15,8 @@ export class Text extends Mesh {
 
   constructor({
     start,
-    finish = start + 1.25,
+    bias = .125,
+    finish = start + 1,
     message,
     font = Text.defaultFont.font,
     fontMap = Text.defaultFont.map,
@@ -57,8 +58,9 @@ export class Text extends Mesh {
     this.scale.setScalar(.05)
     this.visible = false
     
-    this.start = start - .5
-    this.finish = finish - .5
+    this.bias = bias
+    this.start = start - bias - .5
+    this.finish = finish + bias - .5
     this.color = color
 
     Global.eventBus.on('progress', this.onProgress)
@@ -69,7 +71,11 @@ export class Text extends Mesh {
       this.visible = false
     } else {
       this.visible = true
-      const p = rescale(this.start, this.finish, progress)
+      const p = hold(
+        this.start, this.start + .5 + this.bias,
+        this.finish - .5 - this.bias, this.finish,
+        progress
+      )
       this.position.z = p * Global.settings.sceneDepth
       this.material.uniforms.opacity.value = smoothstep(1, .9, p)
     }

@@ -2,6 +2,7 @@ import { FontLoader, LoadingManager, TextureLoader } from "three"
 import { GLTFLoader } from "./util/loaders/GLTFLoader"
 import { Global } from "./Global"
 import { MSDFFontLoader } from "./util/loaders/MSDFFontLoader"
+import { VideoLoader } from "./util/loaders/VideoLoader"
 
 export class ResourceManager {
   constructor(paths) {
@@ -48,6 +49,9 @@ export class ResourceManager {
         return new MSDFFontLoader(this.loadingManager)
       case 'font':
         return new FontLoader(this.loadingManager)
+      case 'video':
+      case 'mp4':
+        return new VideoLoader(this.loadingManager)
       default:
         throw `Unknown resource type ${type}!`
     }

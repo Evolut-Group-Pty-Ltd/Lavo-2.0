@@ -3,6 +3,9 @@ import { Fog } from "./components/Fog";
 import { Color } from "three";
 import { Bubbles } from "./components/Bubbles/Bubbles";
 import { Global } from "./Global";
+import { RotatingMesh } from "./components/RotatingMesh";
+import { Vector3 } from "three";
+import { VideoScreen } from "./components/VideoScreen";
 
 export class Scenario {
   constructor({
@@ -36,11 +39,30 @@ export class Scenario {
         at: 1,
         color: 0,
       }),
+      new RotatingMesh({
+        start: 1,
+        resourceName: 'moon',
+        // position: new Vector3(3, -5, -10),
+        scale: .1,
+      }),
+      new RotatingMesh({
+        start: 1,
+        resourceName: 'rocket',
+        position: new Vector3(3, -5, 0),
+        scale: 1,
+      }),
 
 
       new Text({
         start: 2,
         message: 'There is enough to power our planet forever.',
+      }),
+      new RotatingMesh({
+        start: 2,
+        finish: 5,
+        resourceName: 'earth',
+        position: new Vector3(3, -5, -100),
+        scale: .1,
       }),
 
 
@@ -66,6 +88,20 @@ export class Scenario {
         at: 5,
         color: Global.settings.skyColor,
       }),
+      new RotatingMesh({
+        start: 5,
+        resourceName: 'cloud',
+        position: new Vector3(0, -35, 100),
+        scale: 25,
+        biasRotation: -Math.PI * .25,
+      }),
+      new RotatingMesh({
+        start: 5,
+        resourceName: 'cloud',
+        position: new Vector3(0, -35, -100),
+        scale: 25,
+        biasRotation: Math.PI * .75,
+      }),
 
 
       new Text({
@@ -84,11 +120,29 @@ export class Scenario {
         start: 8,
         message: 'Storing it safely with the help of a metal hydride.',
       }),
+      new RotatingMesh({
+        start: 8,
+        resourceName: 'rug',
+        position: new Vector3(0, -5, 20),
+        scale: 1.5,
+        biasRotation: -Math.PI * .25,
+      }),
+      new RotatingMesh({
+        start: 8,
+        resourceName: 'rug',
+        position: new Vector3(0, -5, -20),
+        scale: 1.5,
+        biasRotation: Math.PI * .75,
+      }),
 
 
       new Text({
         start: 9,
         message: 'Converting it to energy in a fuel cell by simply adding air.',
+      }),
+      new Fog({
+        at: 9,
+        color: Global.settings.skyColor,
       }),
 
 
@@ -98,7 +152,13 @@ export class Scenario {
       }),
       new Fog({
         at: 10,
-        color: Global.settings.skyColor,
+        color: 0x14A3C2,
+      }),
+      new RotatingMesh({
+        start: 10,
+        resourceName: 'island',
+        scale: .5,
+        biasRotation: Math.PI * .75,
       }),
 
 
@@ -127,6 +187,18 @@ export class Scenario {
         start: 13,
         message: 'Reducing pollution and protecting our environment',
       }),
+      new RotatingMesh({
+        start: 13,
+        resourceName: 'fish',
+        position: new Vector3(3, -5, -10),
+        scale: .1,
+      }),
+      new RotatingMesh({
+        start: 13,
+        resourceName: 'goldfish',
+        position: new Vector3(-3, 5, 10),
+        scale: .1,
+      }),
 
 
       new Text({
@@ -146,7 +218,7 @@ export class Scenario {
         message: 'LAVO for life',
       }),
       new Fog({
-        at: 11,
+        at: 16,
         color: 0x24093D,
       }),
 
@@ -154,6 +226,11 @@ export class Scenario {
       new Fog({
         at: 17,
         color: 0,
+      }),
+      new VideoScreen({
+        start: 17,
+        finish: 19,
+        video: 'unit',
       }),
 
 
@@ -176,6 +253,20 @@ export class Scenario {
         message: 'Just one bath tub of water could power your home for 2 weeks.',
         color: black,
       }),
+      new RotatingMesh({
+        start: 20,
+        resourceName: 'duck',
+        position: new Vector3(0, -25, 20),
+        scale: 1,
+        biasRotation: -Math.PI * .25,
+      }),
+      new RotatingMesh({
+        start: 20,
+        resourceName: 'duck',
+        position: new Vector3(0, -25, -20),
+        scale: 1,
+        biasRotation: Math.PI * .75,
+      }),
 
 
       new Text({
@@ -185,45 +276,77 @@ export class Scenario {
       }),
 
 
-      // image
+      new VideoScreen({
+        start: 22,
+        video: 'bike',
+      }),
 
 
       new Text({
-        start: 22,
+        start: 23,
         message: 'Two cycling water bottles can power your bike from Sydney to Canberra (300kms).',
         color: black,
       }),
 
 
-      //image
+      new VideoScreen({
+        start: 24,
+        video: 'bbq',
+      }),
 
 
       new Text({
-        start: 24,
+        start: 25,
         message: 'The LAVO barbeque',
         color: black,
       }),
 
 
       new Text({
-        start: 25,
+        start: 26,
         message: 'A cup of water provides enough heat to cook 300 sausages.',
         color: black,
+      }),
+      new RotatingMesh({
+        start: 26,
+        resourceName: 'hotdog',
+        position: new Vector3(0, -25, 100),
+        scale: 25,
+        biasRotation: -Math.PI * .25,
+      }),
+      new RotatingMesh({
+        start: 26,
+        resourceName: 'hotdog',
+        position: new Vector3(0, -25, -100),
+        scale: 25,
+        biasRotation: Math.PI * .75,
       }),
 
 
       /// FINAL
       new Text({
-        start: 26,
+        start: 27,
         message: 'Join the LAVO community to see how we are changing the way we use energy.',
         color: black,
       }),
       new Fog({
-        at: 26,
+        at: 27,
         color: 0xffffff,
       }),
 
     ]
+
+    for (let i = 0; i < 7; i++) {
+      this.items.push(
+        new RotatingMesh({
+          start: 0,
+          resourceName: 'atom',
+          position: new Vector3(0, 10 + 20 * Math.random(), 100 * Math.random()),
+          scale: .01 + Math.random() * .1,
+          biasRotation: Math.PI * 2 * Math.random(),
+        })
+      )
+    }
 
     Fog.initialize(scene)
 

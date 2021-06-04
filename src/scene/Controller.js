@@ -4,6 +4,7 @@ import { Fog, PerspectiveCamera, Scene } from "three";
 import { Screen } from "./util/Screen";
 import { Scenario } from "./Scenario";
 import { Global } from "./Global";
+import { Damped } from "./util/Damped";
 
 export class Controller {
 
@@ -24,7 +25,7 @@ export class Controller {
 
     this.renderPipe = new RenderingPipeline(container)
 
-    this.camera = new PerspectiveCamera(5, Global.screen.aspect, 10, 1e3)
+    this.camera = new PerspectiveCamera(5, Global.screen.aspect, 10, Global.settings.sceneDepth * 2)
     this.camera.position.set(0, 0, Global.settings.sceneDepth)
     this.camera.lookAt(0, 0, 0)
 
@@ -33,38 +34,44 @@ export class Controller {
 
     this.scenario = new Scenario(this)
 
-    this.pointer = {
-      x: .5,
-      y: .5,
-    }
+    new Damped('progress', 0, .02)
+    new Damped('pointerX', 0, .1)
+    new Damped('pointerY', 0, .1)
   }
 
   start = () => {
     requestAnimationFrame(this.tick)
-
-    Global.eventBus.dispatch('progress', 11)
+    Global.eventBus.dispatch('progress', 0)
   }
 
-  update = ({ mouse }) => {
-    this.pointer.x = mouse.x / Global.screen.x * 2 - 1
-    this.pointer.y = 1 - mouse.y / Global.screen.y * 2
+  updatePointer = ({ mouse: pointer }) => {
 
-    // Global.eventBus.dispatch('progress', (this.pointer.x + 1) * .5 * 27 - .5 )
-    // Global.eventBus.dispatch('progress', this.pointer.x + 12 - .5)
+    Damped.set('pointerX', pointer.x / Global.screen.x * 2 - 1)
+    Damped.set('pointerY', 1 - pointer.y / Global.screen.y * 2)
+  }
 
-    Global.eventBus.dispatch('pointer', this.pointer)
-
-    this.camera.rotation.x =  this.pointer.y * 25e-4
-    this.camera.rotation.y = -this.pointer.x * 25e-4
+  updateProgress = progress => {
+    Damped.set('progress', progress)
   }
 
   prevTime = 0
   tick = time => {
-    Global.eventBus.dispatch('progress', (time * 3e-4) % 27 - .5 )
 
     const dt = Math.min(1e3 / 30, time - this.prevTime)
 
     Global.eventBus.dispatch('update', { time, dt, seconds: time * 1e-3 })
+
+    Global.eventBus.dispatch('progress', Damped.get('progress'))
+    const pointer = {
+      x: Damped.get('pointerX'),
+      y: Damped.get('pointerY'),
+    }
+    Global.eventBus.dispatch('pointer', pointer)
+
+    this.camera.position.x = pointer.x * 2.5
+    this.camera.position.y = pointer.y * 2.5
+    this.camera.lookAt(0, 0, 0)
+
     Global.eventBus.dispatch('render', this)
 
     requestAnimationFrame(this.tick)

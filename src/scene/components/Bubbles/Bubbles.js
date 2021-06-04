@@ -54,7 +54,7 @@ export class Bubbles extends Mesh {
       this.visible = true
       const p = rescale(this.start, this.finish, progress)
       this.material.uniforms.opacity.value = smoothstep(0, .1, p) * smoothstep(1, .9, p)
-      this.material.uniforms.progress.value = progress
+      this.material.uniforms.progress.value = progress * 3
       // this.material.uniforms.speed.value = dProgress
     }
   }
