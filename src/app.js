@@ -3,10 +3,15 @@ import { normalizeWheelDelta } from "./utils/normalizeWheelDelta";
 
 const paths = {
   font: {
+    path: 'fonts/avenir-next-lt-pro-demi-msdf.json',
+    type: 'msdf',
+  },
+  fontOld: {
     path: 'fonts/avenir-next-regular-msdf.json',
     type: 'msdf',
   },
-  fontMap: 'fonts/avenir-next-regular.png',
+  fontMap: 'fonts/avenir-next-lt-pro-demi.png',
+  fontOldMap: 'fonts/avenir-next-regular.png',
   
   atom: 'models/atom.gltf',
   cloud: 'models/cloud.gltf',
