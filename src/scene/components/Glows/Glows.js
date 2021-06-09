@@ -3,7 +3,7 @@ import fragmentShader from './frag.glsl'
 
 import { Color, Points, BufferGeometry, ShaderMaterial, BufferAttribute } from 'three';
 import { Global } from '../../Global';
-import { smoothstep, rescale, saturate } from '../../util/interpolations';
+import { smoothstep, rescale, saturate } from '../../../utils/interpolations';
 import { Vector2 } from 'three';
 import { AdditiveBlending } from 'three';
 

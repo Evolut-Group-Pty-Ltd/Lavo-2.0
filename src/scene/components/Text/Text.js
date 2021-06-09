@@ -2,7 +2,7 @@ import vertexShader from './vert.glsl'
 import fragmentShader from './frag.glsl'
 
 import { RawShaderMaterial, Color, Mesh, Vector3 } from "three"
-import { smoothstep, hold } from "../../util/interpolations"
+import { smoothstep, hold } from "../../../utils/interpolations"
 import { Global } from "../../Global"
 import { TextGeometry } from './BMFontText'
 

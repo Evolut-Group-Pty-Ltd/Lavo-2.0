@@ -1,0 +1,120 @@
+@font-face {
+  font-family: 'Avenir';
+  src: url('~/static/fonts/lt-pro.ttf')
+}
+
+body {
+  font-family: Avenir;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  user-select: none;
+}
+
+#canvas-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.logo {
+  position: fixed;
+  left: 6.25rem;
+  top: 2.5rem;
+}
+
+.logo svg path {
+  fill: #fff;
+  transition: .25s fill;
+}
+
+.inverse .logo svg path {
+  fill: #000;
+}
+
+.right-nav {
+  display: block;
+  position: fixed;
+  right: 5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .25s color;
+}
+
+.inverse .right-nav {
+  color: #202020;
+}
+
+.right-nav .line {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 224px;
+  background: radial-gradient(rgba(255, 255, 255, .7), transparent);
+  transition: .25s background;
+}
+
+.inverse .right-nav .line {
+  background: radial-gradient(rgba(192, 192, 192, .7), transparent);
+}
+
+.right-nav .section-progress {
+  position: absolute;
+  left: 3px;
+  top: 9px;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to left, transparent, #fff, transparent);
+  transition: .25s background, .125s height;
+}
+
+.inverse .right-nav .section-progress {
+  background: linear-gradient(to left, transparent, #666, transparent);
+}
+
+.right-nav .section-current {
+  position: absolute;
+  right: -3.5px;
+  width: 9px;
+  height: 9px;
+  background-color: #3CE6FF;
+  border-radius: 50%;
+  transition: .25s top;
+}
+.right-nav .links {
+  margin-right: 1.25rem;
+}
+
+.right-nav .nav-link {
+  display: block;
+  text-align: right;
+  opacity: .5;
+  cursor: pointer;
+  transition: 250ms opacity;
+}
+
+.right-nav .nav-link:hover {
+  opacity: 1;
+}
+
+.right-nav .nav-link.active {
+  opacity: 1;
+}
+
+.products {
+  position: fixed;
+  right: 6.25rem;
+  top: 2.5rem;
+  transition: .25s color;
+}
+.inverse .products {
+  color: #1E1E1E;
+}

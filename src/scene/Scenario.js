@@ -16,7 +16,7 @@ export class Scenario {
     scene,
   }) {
 
-    const black = new Color('black')
+    const black = new Color(0x222222)
 
     Text.defaultFont = {
       font: Global.assets.get('font'),

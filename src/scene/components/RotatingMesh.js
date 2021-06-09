@@ -1,4 +1,4 @@
-import { rescale } from "../util/interpolations"
+import { rescale } from "../../utils/interpolations"
 import { Global } from "../Global"
 import { Group, Vector3, MeshBasicMaterial } from "three";
 

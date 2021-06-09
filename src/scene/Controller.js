@@ -4,8 +4,7 @@ import { Fog, PerspectiveCamera, Scene } from "three";
 import { Screen } from "./util/Screen";
 import { Scenario } from "./Scenario";
 import { Global } from "./Global";
-import { Damped } from "./util/Damped";
-import { Frustum } from "three";
+import { Damped } from "../utils/Damped";
 
 export class Controller {
 
@@ -35,35 +34,29 @@ export class Controller {
 
     this.scenario = new Scenario(this)
 
-    new Damped('progress', 0, .02)
+    Global.eventBus.dispatch('progress', 0)
+
     new Damped('pointerX', 0, .1)
     new Damped('pointerY', 0, .1)
   }
 
-  start = () => {
-    requestAnimationFrame(this.tick)
-    Global.eventBus.dispatch('progress', 0)
-  }
-
   updatePointer = ({ mouse: pointer }) => {
-
     Damped.set('pointerX', pointer.x / Global.screen.x * 2 - 1)
     Damped.set('pointerY', 1 - pointer.y / Global.screen.y * 2)
   }
 
   updateProgress = progress => {
-    Damped.set('progress', progress)
+    Global.eventBus.dispatch('progress', progress)
   }
 
   prevTime = 0
-  tick = time => {
+  onFrame = time => {
 
     const dt = Math.min(1e3 / 30, time - this.prevTime)
     this.prevTime = time
 
     Global.eventBus.dispatch('update', { time, dt, seconds: time * 1e-3, ds: dt * 1e-3 })
 
-    Global.eventBus.dispatch('progress', Damped.get('progress'))
     const pointer = {
       x: Damped.get('pointerX'),
       y: Damped.get('pointerY'),
@@ -75,8 +68,6 @@ export class Controller {
     this.camera.lookAt(0, 0, 0)
 
     Global.eventBus.dispatch('render', this)
-
-    requestAnimationFrame(this.tick)
   }
 
   onResize = resolution => {

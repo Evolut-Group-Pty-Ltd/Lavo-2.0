@@ -2,7 +2,7 @@ import vertexShader from './vert.glsl'
 import fragmentShader from './frag.glsl'
 
 import { ShaderMaterial, AdditiveBlending, PlaneBufferGeometry, Mesh, Vector2 } from "three";
-import { rescale, smoothstep } from "../../util/interpolations";
+import { rescale, smoothstep } from "../../../utils/interpolations";
 import { Global } from '../../Global';
 
 export class Bubbles extends Mesh {

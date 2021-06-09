@@ -1,6 +1,6 @@
 import { Color } from "three"
 import { Global } from "../Global"
-import { rescale } from "../util/interpolations"
+import { rescale } from "../../utils/interpolations"
 
 // this is actually a sugar class to keep scenario declaration consistent
 export class Fog {

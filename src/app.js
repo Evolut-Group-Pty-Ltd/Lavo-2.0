@@ -1,5 +1,9 @@
+import './style/site.css'
+
 import { Controller } from "./scene/Controller";
 import { normalizeWheelDelta } from "./utils/normalizeWheelDelta";
+import { Nav } from "./Nav";
+import { Damped } from './utils/Damped';
 
 const paths = {
   font: {
@@ -30,8 +34,37 @@ const paths = {
   unit: 'video/unit.mp4',
 }
 
+const navSections = {
+  space: 0,
+  sky: 5,
+  ocean: 11,
+  lavo: {
+    p: 18,
+    inverse: true,
+  },
+  contact: {
+    p: 27,
+    inverse: true,
+  },
+}
+
 const gl = new Controller({
   paths,
+})
+
+new Damped('progress', 0, .02)
+
+console.log("Damped", Damped.values)
+
+const nav = new Nav({
+  sections: navSections,
+  onNavCallback: (sectionData) => {
+    let progress = sectionData
+    if (typeof sectionData != 'number') {
+      progress = sectionData.p
+    }
+    updateScrollPosition(progress * 100)
+  },
 })
 
 // gl.eventBus.on('loading.error', ({url}) => {
@@ -42,7 +75,31 @@ const gl = new Controller({
 //   console.log(`Loaded ${loaded / total * 100 | 0}%`)
 // })
 
-let scrollPosition = 0
+let scrollPosition = 0, animFrame
+
+const onFrame = time => {
+  Damped.update()
+
+  const progress = Damped.get('progress')
+  gl.updateProgress(progress)
+  nav.updateProgress(progress)
+  gl.onFrame(time)
+  
+  animFrame = requestAnimationFrame(onFrame)
+}
+
+const updateScrollPosition = p => {
+  scrollPosition = p
+  if (scrollPosition < 0) {
+    scrollPosition = 0
+  }
+  if (scrollPosition > 2700) {
+    scrollPosition = 2700
+  }
+  const progress = scrollPosition / 100
+  Damped.set('progress', progress)
+  // nav.updateProgress(progress)
+}
 
 gl.eventBus.on('loading.complete', () => {
 
@@ -51,8 +108,6 @@ gl.eventBus.on('loading.complete', () => {
   gl.create({
     container,
   })
-
-  gl.start()
 
   container.addEventListener('mousemove', e => {
     gl.updatePointer({
@@ -65,16 +120,10 @@ gl.eventBus.on('loading.complete', () => {
 
   window.addEventListener('wheel', e => {
     const delta = normalizeWheelDelta(e)
-    scrollPosition -= delta * 60
-    if (scrollPosition < 0) {
-      scrollPosition = 0
-    }
-    if (scrollPosition > 2700) {
-      scrollPosition = 2700
-    }
-    const progress = scrollPosition / 100
-    gl.updateProgress(progress)
+    updateScrollPosition(scrollPosition - delta * 60)
   })
+
+  animFrame = requestAnimationFrame(onFrame)
 })
 
 gl.load()

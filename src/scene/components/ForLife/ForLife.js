@@ -3,7 +3,7 @@ import fragmentShader from './frag.glsl'
 
 import { AdditiveBlending, Color, Mesh, VideoTexture, PlaneBufferGeometry, ShaderMaterial } from 'three';
 import { Global } from '../../Global';
-import { smoothstep, rescale, saturate, lerp } from '../../util/interpolations';
+import { smoothstep, rescale, saturate, lerp } from '../../../utils/interpolations';
 import { AlwaysDepth } from 'three';
 
 export class ForLife extends Mesh {

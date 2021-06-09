@@ -1,6 +1,9 @@
-import { Mesh, PlaneBufferGeometry, MeshBasicMaterial, VideoTexture } from "three";
+import vertexShader from './basicNoSRGB/vert.glsl'
+import fragmentShader from './basicNoSRGB/frag.glsl'
+
+import { Mesh, Color, PlaneBufferGeometry, ShaderMaterial, VideoTexture } from "three";
 import { Global } from "../Global";
-import { hold, smoothstep } from "../util/interpolations";
+import { hold, smoothstep } from "../../utils/interpolations";
 
 export class VideoScreen extends Mesh {
   constructor({
@@ -13,8 +16,17 @@ export class VideoScreen extends Mesh {
 
     super(
       new PlaneBufferGeometry(20, 20, 1, 1),
-      new MeshBasicMaterial({
-        map,
+      new ShaderMaterial({
+        uniforms: {
+          map: { value: map },
+          opacity: { value: 0 },
+          fogColor: { value: new Color() },
+          fogNear: { value: 1 },
+          fogFar: { value: 2 },
+        },
+        vertexShader,
+        fragmentShader,
+        fog: true,
         transparent: true,
       })
     )
@@ -41,7 +53,7 @@ export class VideoScreen extends Mesh {
         progress
       )
       this.position.z = p * Global.settings.sceneDepth
-      this.material.opacity = smoothstep(1, .9, p)
+      this.material.uniforms.opacity.value = smoothstep(1, .9, p)
     } else {
       if (oldVisible) {
         this.video.pause()
