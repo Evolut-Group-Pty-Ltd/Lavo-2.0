@@ -69,7 +69,7 @@ export class Bubbles extends Mesh {
   }
 
   onPointer = pointer => {
-    this.material.uniforms.shift.value.x =  pointer.x * .03
-    this.material.uniforms.shift.value.y = -pointer.y * .06
+    this.material.uniforms.shift.value.x = pointer.x * .03
+    this.material.uniforms.shift.value.y = pointer.y * .06
   }
 }
