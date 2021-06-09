@@ -5,6 +5,7 @@ import { Screen } from "./util/Screen";
 import { Scenario } from "./Scenario";
 import { Global } from "./Global";
 import { Damped } from "./util/Damped";
+import { Frustum } from "three";
 
 export class Controller {
 
@@ -58,8 +59,9 @@ export class Controller {
   tick = time => {
 
     const dt = Math.min(1e3 / 30, time - this.prevTime)
+    this.prevTime = time
 
-    Global.eventBus.dispatch('update', { time, dt, seconds: time * 1e-3 })
+    Global.eventBus.dispatch('update', { time, dt, seconds: time * 1e-3, ds: dt * 1e-3 })
 
     Global.eventBus.dispatch('progress', Damped.get('progress'))
     const pointer = {

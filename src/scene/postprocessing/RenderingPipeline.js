@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, WebGL1Renderer } from "three"
+import { ACESFilmicToneMapping, sRGBEncoding, WebGL1Renderer } from "three"
 import { Global } from "../Global"
 
 export class RenderingPipeline {
@@ -12,6 +12,7 @@ export class RenderingPipeline {
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.resize()
     
+    this.renderer.outputEncoding = sRGBEncoding
     // this.renderer.toneMapping = ACESFilmicToneMapping
     // this.renderer.toneMappingExposure = 1
 

@@ -6,6 +6,10 @@ export function saturate(value) {
   return Math.max(0, Math.min(1, value))
 }
 
+export function lerp(from, to, value) {
+  return from + (to - from) * value
+}
+
 export function smooth(value) {
   return value * value * (3 - 2 * value)
 }

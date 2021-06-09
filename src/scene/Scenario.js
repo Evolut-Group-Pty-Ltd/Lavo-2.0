@@ -6,6 +6,10 @@ import { Global } from "./Global";
 import { RotatingMesh } from "./components/RotatingMesh";
 import { Vector3 } from "three";
 import { VideoScreen } from "./components/VideoScreen";
+import { Stars } from "./components/Stars/Stars";
+import { Glows } from "./components/Glows/Glows";
+import { Fishes } from "./components/Fishes";
+import { ForLife } from "./components/ForLife/ForLife";
 
 export class Scenario {
   constructor({
@@ -29,6 +33,10 @@ export class Scenario {
         at: 0,
         color: Global.settings.spaceColor,
       }),
+      new Stars({
+        start: 0,
+        finish: 4,
+      }),
 
 
       new Text({
@@ -39,31 +47,31 @@ export class Scenario {
         at: 1,
         color: 0,
       }),
-      new RotatingMesh({
-        start: 1,
-        resourceName: 'moon',
-        // position: new Vector3(3, -5, -10),
-        scale: .1,
-      }),
-      new RotatingMesh({
-        start: 1,
-        resourceName: 'rocket',
-        position: new Vector3(3, -5, 0),
-        scale: 1,
-      }),
+      // new RotatingMesh({
+      //   start: 1,
+      //   resourceName: 'moon',
+      //   // position: new Vector3(3, -5, -10),
+      //   scale: .1,
+      // }),
+      // new RotatingMesh({
+      //   start: 1,
+      //   resourceName: 'rocket',
+      //   position: new Vector3(3, -5, 0),
+      //   scale: 1,
+      // }),
 
 
       new Text({
         start: 2,
         message: 'There is enough to power our planet forever.',
       }),
-      new RotatingMesh({
-        start: 2,
-        finish: 5,
-        resourceName: 'earth',
-        position: new Vector3(3, -5, -100),
-        scale: .1,
-      }),
+      // new RotatingMesh({
+      //   start: 2,
+      //   finish: 5,
+      //   resourceName: 'earth',
+      //   position: new Vector3(3, -5, -100),
+      //   scale: .1,
+      // }),
 
 
       new Text({
@@ -120,20 +128,20 @@ export class Scenario {
         start: 8,
         message: 'Storing it safely with the help of a metal hydride.',
       }),
-      new RotatingMesh({
-        start: 8,
-        resourceName: 'rug',
-        position: new Vector3(0, -5, 20),
-        scale: 1.5,
-        biasRotation: -Math.PI * .25,
-      }),
-      new RotatingMesh({
-        start: 8,
-        resourceName: 'rug',
-        position: new Vector3(0, -5, -20),
-        scale: 1.5,
-        biasRotation: Math.PI * .75,
-      }),
+      // new RotatingMesh({
+      //   start: 8,
+      //   resourceName: 'rug',
+      //   position: new Vector3(0, -5, 20),
+      //   scale: 1.5,
+      //   biasRotation: -Math.PI * .25,
+      // }),
+      // new RotatingMesh({
+      //   start: 8,
+      //   resourceName: 'rug',
+      //   position: new Vector3(0, -5, -20),
+      //   scale: 1.5,
+      //   biasRotation: Math.PI * .75,
+      // }),
 
 
       new Text({
@@ -154,12 +162,12 @@ export class Scenario {
         at: 10,
         color: 0x14A3C2,
       }),
-      new RotatingMesh({
-        start: 10,
-        resourceName: 'island',
-        scale: .5,
-        biasRotation: Math.PI * .75,
-      }),
+      // new RotatingMesh({
+      //   start: 10,
+      //   resourceName: 'island',
+      //   scale: .5,
+      //   biasRotation: Math.PI * .75,
+      // }),
 
 
       // COLUMN 3
@@ -169,7 +177,7 @@ export class Scenario {
       }),
       new Bubbles({
         start: 11,
-        finish: 13,
+        finish: 14,
       }),
       new Fog({
         at: 11,
@@ -187,23 +195,24 @@ export class Scenario {
         start: 13,
         message: 'Reducing pollution and protecting our environment',
       }),
-      new RotatingMesh({
+      new Fishes({
         start: 13,
-        resourceName: 'fish',
-        position: new Vector3(3, -5, -10),
+        fishNames: ['fish', 'goldfish'],
         scale: .1,
       }),
-      new RotatingMesh({
+      new Glows({
         start: 13,
-        resourceName: 'goldfish',
-        position: new Vector3(-3, 5, 10),
-        scale: .1,
+        finish: 15,
       }),
 
 
       new Text({
         start: 14,
         message: 'with an unlimited source of energy',
+      }),
+      new Glows({
+        start: 14,
+        finish: 16,
       }),
 
 
@@ -217,6 +226,11 @@ export class Scenario {
         start: 16,
         message: 'LAVO for life',
       }),
+      new ForLife({
+        start: 16,
+        finish: 19,
+        video: 'unit',
+      }),
       new Fog({
         at: 16,
         color: 0x24093D,
@@ -225,14 +239,8 @@ export class Scenario {
 
       new Fog({
         at: 17,
-        color: 0,
+        color: 0x24093D,
       }),
-      new VideoScreen({
-        start: 17,
-        finish: 19,
-        video: 'unit',
-      }),
-
 
       // COLUMN 4
       new Fog({
@@ -256,14 +264,14 @@ export class Scenario {
       new RotatingMesh({
         start: 20,
         resourceName: 'duck',
-        position: new Vector3(0, -25, 20),
+        position: new Vector3(0, -20, 20),
         scale: 1,
         biasRotation: -Math.PI * .25,
       }),
       new RotatingMesh({
         start: 20,
         resourceName: 'duck',
-        position: new Vector3(0, -25, -20),
+        position: new Vector3(0, -20, -20),
         scale: 1,
         biasRotation: Math.PI * .75,
       }),
@@ -311,14 +319,14 @@ export class Scenario {
         start: 26,
         resourceName: 'hotdog',
         position: new Vector3(0, -25, 100),
-        scale: 25,
+        scale: 20,
         biasRotation: -Math.PI * .25,
       }),
       new RotatingMesh({
         start: 26,
         resourceName: 'hotdog',
         position: new Vector3(0, -25, -100),
-        scale: 25,
+        scale: 20,
         biasRotation: Math.PI * .75,
       }),
 
