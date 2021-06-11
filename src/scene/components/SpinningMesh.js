@@ -22,9 +22,12 @@ export class SpinningMesh extends Group {
 
     this.mesh = Global.assets.get(resourceName).scene.clone()
 
+    const depth = position.z * Global.settings.sceneDepth
+    const bounds = Global.screen.getBoundsByDepth(depth)
+
     this.mesh.position.set(
-      position.x * Global.screen.halfBox.x, 
-      position.y * Global.screen.halfBox.y,
+      position.x * bounds.x, 
+      position.y * bounds.y,
       position.z * Global.settings.sceneDepth,
     )
     this.mesh.rotation.copy(rotation)
@@ -36,6 +39,7 @@ export class SpinningMesh extends Group {
         color: { value: null },
         map: { value: null },
         fresnelPower: { value: .25 },
+        aspect: { value: Global.screen.aspect },
         fogColor: { value: new Color() },
         fogNear: { value: 1 },
         fogFar: { value: 2 },
@@ -60,6 +64,7 @@ export class SpinningMesh extends Group {
 
     Global.eventBus.on('update', this.onUpdate)
     Global.eventBus.on('progress', this.onProgress)
+    Global.eventBus.on('resize', this.onResize)
   }
   
   onProgress = progress => {
@@ -72,5 +77,13 @@ export class SpinningMesh extends Group {
 
   onUpdate = ({ seconds }) => {
     this.mesh.rotation.y = seconds + this.ry
+  }
+
+  onResize = () => {
+    this.mesh.traverse(child => {
+      if (child.isMesh) {
+        child.material.uniforms.aspect.value = Global.screen.aspect
+      }
+    })
   }
 }

@@ -13,19 +13,23 @@ export class Stars extends Points {
     
     const count = 100, size = count * 3
     const positions = new Float32Array(size)
-    for (let i = 0; i < size; i++) {
+    const phases = new Float32Array(count)
+    for (let i = 0, j = 0; j < count; i += 3, j++) {
       positions[i    ] = Math.random() * Global.screen.box.x - Global.screen.halfBox.x
       positions[i + 1] = Math.random() * Global.screen.box.y - Global.screen.halfBox.y
       positions[i + 2] = 200 * Math.random() - 100
+      phases[j] = 23 * Math.random()
     }
     const geometry = new BufferGeometry()
     geometry.setAttribute('position', new BufferAttribute(positions, 3))
+    geometry.setAttribute('phase', new BufferAttribute(phases, 1))
 
     super(
       geometry,
       new ShaderMaterial({
         uniforms: {
           opacity: { value: 0 },
+          time: { value: 0 },
           shift: { value: new Vector2() },
         },
         transparent: true,
@@ -38,6 +42,7 @@ export class Stars extends Points {
     this.finish = finish
 
     Global.eventBus.on('progress', this.onProgress)
+    Global.eventBus.on('update', this.onUpdate)
     Global.eventBus.on('pointer', this.onPointer)
   }
 
@@ -47,6 +52,10 @@ export class Stars extends Points {
       const p = rescale(this.start, this.finish, progress)
       this.material.uniforms.opacity.value = smoothstep(1, .9, p)
     }
+  }
+
+  onUpdate = ({ seconds }) => {
+    this.material.uniforms.time.value = seconds
   }
 
   onPointer = pointer => {

@@ -22,7 +22,7 @@ export class Rocket extends Group {
       position.z * Global.settings.sceneDepth,
     )
     this.mesh.rotation.reorder('XZY')
-    this.mesh.rotation.z = Math.PI * -.25
+    this.mesh.rotation.z = -Math.atan(Global.screen.aspect)
     this.mesh.scale.setScalar(scale)
 
     const material = new ShaderMaterial({
@@ -30,6 +30,7 @@ export class Rocket extends Group {
         color: { value: new Vector3(3, 3, 3) }, // maybe looks like a crutch, but for shader this is ok
         map: { value: null },
         fresnelPower: { value: .75 },
+        aspect: { value: Global.screen.aspect },
         fogColor: { value: new Color() },
         fogNear: { value: 1 },
         fogFar: { value: 2 },
@@ -55,6 +56,7 @@ export class Rocket extends Group {
 
     Global.eventBus.on('update', this.onUpdate)
     Global.eventBus.on('progress', this.onProgress)
+    Global.eventBus.on('resize', this.onResize)
   }
 
   onProgress = progress => {
@@ -85,5 +87,14 @@ export class Rocket extends Group {
         this.initialPosition.z * Global.settings.sceneDepth,
       )
     }
+  }
+
+  onResize = () => {
+    this.mesh.rotation.z = -Math.atan(Global.screen.aspect)
+    this.mesh.traverse(child => {
+      if (child.isMesh) {
+        child.material.uniforms.aspect.value = Global.screen.aspect
+      }
+    })
   }
 }

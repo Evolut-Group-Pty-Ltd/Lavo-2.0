@@ -20,7 +20,8 @@ export class Text extends Mesh {
     message,
     font = Text.defaultFont.font,
     fontMap = Text.defaultFont.map,
-    color = Text.white
+    color = Text.white,
+    spaceGradient = false,
   }) {
     super(
       new TextGeometry({
@@ -31,10 +32,14 @@ export class Text extends Mesh {
         flipY: true,
       }),
       new RawShaderMaterial({
+        defines: {
+          spaceGradient: spaceGradient ? 1 : 0,
+        },
         uniforms: {
           map: { value: fontMap },
           opacity: { value: 1 },
           color: { value: color },
+          aspect: { value: Global.screen.aspect },
           fogColor: { value: new Color() },
           fogNear: { value: 1 },
           fogFar: { value: 2 },
@@ -64,6 +69,7 @@ export class Text extends Mesh {
     this.color = color
 
     Global.eventBus.on('progress', this.onProgress)
+    Global.eventBus.on('resize', this.onResize)
   }
   
   onProgress = progress => {
@@ -79,5 +85,9 @@ export class Text extends Mesh {
       this.position.z = p * Global.settings.sceneDepth
       this.material.uniforms.opacity.value = smoothstep(1, .9, p)
     }
+  }
+
+  onResize = () => {
+    this.material.uniforms.aspect.value = Global.screen.aspect
   }
 }

@@ -40,4 +40,11 @@ export class Screen {
 
     Global.eventBus.dispatch('resize', this)
   }
+
+  getBoundsByDepth = depth => {
+    const halfVFOV = Math.PI / 180 * Global.settings.fov * .5
+    const y = (Global.settings.sceneDepth - depth) * Math.tan(halfVFOV) * .5
+    const x = this.aspect * y
+    return { x, y }
+  }
 }

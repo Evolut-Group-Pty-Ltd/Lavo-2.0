@@ -4,7 +4,9 @@
 varying vec2 vUv;
 varying float fogDepth;
 varying vec3 vWorldNormal;
+varying vec2 vNDC;
 
+uniform float aspect;
 uniform vec3 color;
 uniform sampler2D map;
 uniform float fresnelPower;
@@ -26,8 +28,11 @@ void main() {
   float fresnelFactor = abs(normal.z);
   finalColor = finalColor * (1. - fresnelPower * fresnelFactor);
 
+  vec2 ndc = vNDC;
+  ndc.x *= aspect;
   float fogFactor = smoothstep(fogNear, fogFar, fogDepth);
-  finalColor = mix(finalColor, fogColor, fogFactor);
+  vec3 fogGradient = mix(vec3(0.173,0.059,0.271), vec3(0.024,0.024,0.208), min(1., length(ndc)));
+  finalColor = mix(finalColor, fogGradient, fogFactor);
 
   gl_FragColor = vec4(s(finalColor), 1.);
 }

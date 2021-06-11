@@ -30,6 +30,7 @@ export class Moon extends Group {
         color: { value: null },
         map: { value: null },
         fresnelPower: { value: .75 },
+        aspect: { value: Global.screen.aspect },
         fogColor: { value: new Color() },
         fogNear: { value: 1 },
         fogFar: { value: 2 },
@@ -53,6 +54,7 @@ export class Moon extends Group {
 
     Global.eventBus.on('update', this.onUpdate)
     Global.eventBus.on('progress', this.onProgress)
+    Global.eventBus.on('resize', this.onResize)
   }
   
   onProgress = progress => {
@@ -65,5 +67,13 @@ export class Moon extends Group {
 
   onUpdate = ({ seconds }) => {
     this.mesh.rotation.y = seconds * .2
+  }
+
+  onResize = () => {
+    this.mesh.traverse(child => {
+      if (child.isMesh) {
+        child.material.uniforms.aspect.value = Global.screen.aspect
+      }
+    })
   }
 }

@@ -14,6 +14,7 @@ import { SpinningMesh } from "./components/SpinningMesh";
 import { Moon } from "./components/Moon";
 import { Rocket } from "./components/Rocket";
 import { Earth } from "./components/Earth";
+import { SpaceGradient } from "./components/SpaceGradient/SpaceGradient";
 
 export class Scenario {
   constructor({
@@ -31,7 +32,8 @@ export class Scenario {
 
       new Text({
         start: 0,
-        message: 'Hydrogen.\nThe most abundant element in the universe.',
+        message: 'Hydrogen.\nThe most abundant element in the universe',
+        spaceGradient: true,
       }),
       new Fog({
         at: 0,
@@ -48,11 +50,16 @@ export class Scenario {
         position: new Vector3(0, .1, 0),
         scale: .1,
       }),
+      new SpaceGradient({
+        start: -1,
+        finish: 4,
+      }),
 
 
       new Text({
         start: 1,
-        message: 'A fuel source so powerful it helped us to travel to the moon.',
+        message: 'A fuel source so powerful it took us to the moon',
+        spaceGradient: true,
       }),
       new Rocket({
         start: 1,
@@ -64,7 +71,8 @@ export class Scenario {
 
       new Text({
         start: 2,
-        message: 'There is enough to power our planet forever.',
+        message: 'There is enough to power our planet forever',
+        spaceGradient: true,
       }),
       new Earth({
         start: 1,
@@ -77,77 +85,68 @@ export class Scenario {
 
       new Text({
         start: 3,
-        message: 'So where do we find Hydrogen on Earth?',
-      }),
-
-
-      new Text({
-        start: 4,
-        finish: 6,
-        message: 'Water.\nOur source of life and energy.',
+        message: 'So where on Earth is it? That’s easy, the world is covered in it',
+        spaceGradient: true,
       }),
       new Fog({
-        at: 4,
+        at: 3,
         color: Global.settings.spaceColor,
       }),
 
 
       // COLUMN 2
       new Fog({
-        at: 5,
+        at: 4,
         color: Global.settings.skyColor,
       }),
-      new RotatingMesh({
+
+
+      new Text({
+        start: 5,
+        finish: 6,
+        message: 'It\'s in our water - a source of life and energy',
+      }),
+      new TrivialMesh({
         start: 5,
         resourceName: 'cloud',
         position: new Vector3(0, -35, 100),
         scale: 25,
-        biasRotation: -Math.PI * .25,
       }),
-      new RotatingMesh({
+      new TrivialMesh({
         start: 5,
         resourceName: 'cloud',
         position: new Vector3(0, -35, -100),
         scale: 25,
-        biasRotation: Math.PI * .75,
       }),
 
 
       new Text({
         start: 6,
-        message: 'Water is made from Hydrogen & Oxygen\nH2O',
+        message: 'Hydrogen & Oxygen are the ingredients for water or H2O',
       }),
 
 
       new Text({
         start: 7,
-        message: 'We can separate water to produce hydrogen through electrolysis.',
+        message: 'We separate water to produce hydrogen through electrolysis',
       }),
 
 
       new Text({
         start: 8,
-        message: 'Storing it safely with the help of a metal hydride.',
+        message: 'Using a metal hydride to store the hydrogen safely',
       }),
-      new RotatingMesh({
+      new TrivialMesh({
         start: 8,
         resourceName: 'rug',
-        position: new Vector3(0, -5, 20),
+        position: new Vector3(0, -.1, 20),
         scale: 1.5,
-        biasRotation: -Math.PI * .25,
-      }),
-      new RotatingMesh({
-        start: 8,
-        resourceName: 'rug',
-        position: new Vector3(0, -5, -20),
-        scale: 1.5,
-        biasRotation: Math.PI * .75,
       }),
 
 
       new Text({
         start: 9,
-        message: 'Converting it to energy in a fuel cell by simply adding air.',
+        message: 'A fuel cell converts hydrogen to energy by just adding air',
       }),
       new Fog({
         at: 9,
@@ -155,22 +154,25 @@ export class Scenario {
       }),
 
 
+      // 10 is just clouds
+
+
       new Text({
-        start: 10,
-        message: 'Creating an abundant supply of energy to power our world',
+        start: 11,
+        message: 'Creating lots of energy to power the world',
       }),
       new Fog({
-        at: 10,
+        at: 11,
         color: 0x14A3C2,
       }),
       new TrivialMesh({
-        start: 10,
+        start: 11,
         resourceName: 'island',
         position: new Vector3(-.4, -.4, 0),
         scale: .5,
       }),
       new TrivialMesh({
-        start: 10,
+        start: 11,
         resourceName: 'island',
         position: new Vector3(.5, .5, 0),
         scale: .4,
@@ -179,63 +181,63 @@ export class Scenario {
 
       // COLUMN 3
       new Text({
-        start: 11,
-        message: 'We need clean energy to reduce our carbon footprint and improve our world.',
+        start: 12,
+        message: 'Clean energy is needed to reduce our carbon footprint',
       }),
       new Bubbles({
-        start: 11,
+        start: 12,
         finish: 14,
       }),
       new Fog({
-        at: 11,
+        at: 12,
         color: 0x14A3C2,
       }),
 
 
       new Text({
-        start: 12,
-        message: 'Using renewable energy we can create green hydrogen.',
+        start: 13,
+        message: 'If we use renewable energy we can create green hydrogen',
       }),
 
 
       new Text({
-        start: 13,
-        message: 'Reducing pollution and protecting our environment',
+        start: 14,
+        message: 'This can reduce pollution and protect our environment',
       }),
       new Fishes({
-        start: 13,
+        start: 14,
         fishNames: ['fish', 'goldfish'],
         scale: .1,
       }),
       new Glows({
-        start: 13,
+        start: 14,
         finish: 15,
       }),
 
 
       new Text({
-        start: 14,
-        message: 'with an unlimited source of energy',
+        start: 15,
+        message: 'Giving the world all the energy it needs',
       }),
       new Glows({
-        start: 14,
+        start: 15,
         finish: 16,
       }),
 
 
       new Text({
-        start: 15,
-        message: 'to power our planet with the help of the sun.',
+        start: 16,
+        message: 'Powering our planet with the help of the sun',
       }),
 
 
       new Text({
-        start: 16,
+        start: 17,
         message: 'LAVO for life',
       }),
       new ForLife({
-        start: 16,
-        finish: 19,
+        start: 17,
+        finish: 20,
         video: 'unit',
       }),
       new Fog({
@@ -245,27 +247,26 @@ export class Scenario {
 
 
       new Fog({
-        at: 17,
+        at: 18,
         color: 0x24093D,
       }),
 
+
       // COLUMN 4
-      new Fog({
-        at: 18,
-        color: 0xffffff,
-      }),
-
-
       new Text({
         start: 19,
         message: 'The LAVO Hydrogen Energy Storage System',
         color: black,
       }),
-
+      new Fog({
+        at: 19,
+        color: 0xffffff,
+      }),
+      
 
       new Text({
         start: 20,
-        message: 'Just one bath tub of water could power your home for 2 weeks.',
+        message: 'Imagine, 1 bath of water could power the house for 2 weeks',
         color: black,
       }),
       new RotatingMesh({
@@ -284,22 +285,22 @@ export class Scenario {
       }),
 
 
-      new Text({
-        start: 21,
-        message: 'The LAVO bike',
-        color: black,
-      }),
-
-
       new VideoScreen({
-        start: 22,
+        start: 21,
         video: 'bike',
       }),
 
 
       new Text({
+        start: 22,
+        message: 'The Lavo Bike',
+        color: black,
+      }),
+
+
+      new Text({
         start: 23,
-        message: 'Two cycling water bottles can power your bike from Sydney to Canberra (300kms).',
+        message: 'Ride from Sydney to Canberra powered by 2 bottles of water',
         color: black,
       }),
 
@@ -319,7 +320,7 @@ export class Scenario {
 
       new Text({
         start: 26,
-        message: 'A cup of water provides enough heat to cook 300 sausages.',
+        message: 'Cook 150 sausages with just 1 cup of water',
         color: black,
       }),
       new RotatingMesh({
@@ -341,7 +342,7 @@ export class Scenario {
       /// FINAL
       new Text({
         start: 27,
-        message: 'Join the LAVO community to see how we are changing the way we use energy.',
+        message: 'Changing the way we live with energy\nJoin our LAVO community',
         color: black,
       }),
       new Fog({
@@ -351,7 +352,7 @@ export class Scenario {
 
     ]
 
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 20; i++) {
       this.items.push(
         new SpinningMesh({
           start: 0,
@@ -359,7 +360,7 @@ export class Scenario {
           position: new Vector3(
             Math.random() - .5,
             Math.random() - .5,
-            Math.random() * .5,
+            Math.random() - .5,
           ),
           rotation: new Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
           scale: 1 + Math.random() * .1,
