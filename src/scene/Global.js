@@ -7,6 +7,8 @@ export class Global {
   static assets = null
 
   static settings = {
+    fov: 5,
+
     fogStart: 750,
     sceneDepth: 1000,
 

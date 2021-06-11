@@ -3,8 +3,6 @@ import { Global } from "../Global"
 import { Group, Vector3, MeshBasicMaterial } from "three";
 
 const v3 = new Vector3()
-const boundX = 50
-const boundY = 50
 
 export class Fishes extends Group {
   constructor({
@@ -25,7 +23,11 @@ export class Fishes extends Group {
       const resourceName = fishNames[Math.floor(Math.random() * fishNames.length)]
 
       const mesh = Global.assets.get(resourceName).scene.clone()
-      mesh.position.set(Math.random() * 50 - 25, Math.random() * 50 - 25, Math.random() * 200 - 100)
+      mesh.position.set(
+        Math.random() * Global.screen.box.x - Global.screen.halfBox.x,
+        Math.random() * Global.screen.box.y - Global.screen.halfBox.y,
+        Math.random() * 200 - 100
+      )
       mesh.rotation.set(Math.PI * .5, theta + Math.PI * .5, 0)
       mesh.scale.setScalar(scale)
       
@@ -63,6 +65,10 @@ export class Fishes extends Group {
   }
 
   onUpdate = ({ seconds, ds }) => {
+    const boundX = Global.screen.halfBox.x
+    const boundY = Global.screen.halfBox.y
+    const wX = Global.screen.box.x
+    const wY = Global.screen.box.y
     this.fishes.forEach(fish => {
       const theta = fish.theta + Math.sin(seconds) * fish.thetaAmp
       v3.x = Math.cos(theta) * ds * fish.speed
@@ -71,16 +77,16 @@ export class Fishes extends Group {
       fish.mesh.rotation.y = theta + Math.PI * .5
 
       if (fish.mesh.position.x > boundX) {
-        fish.mesh.position.x -= boundX + boundX
+        fish.mesh.position.x -= wX
       }
       if (fish.mesh.position.x < -boundX) {
-        fish.mesh.position.x += boundX + boundX
+        fish.mesh.position.x += wX
       }
       if (fish.mesh.position.y > boundY) {
-        fish.mesh.position.y -= boundY + boundY
+        fish.mesh.position.y -= wY
       }
       if (fish.mesh.position.y < -boundY) {
-        fish.mesh.position.y += boundY + boundY
+        fish.mesh.position.y += wY
       }
     })
   }

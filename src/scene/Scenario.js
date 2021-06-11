@@ -1,15 +1,19 @@
+import { Euler, Vector3, Color } from "three";
+import { Global } from "./Global";
 import { Text } from "./components/Text/Text";
 import { Fog } from "./components/Fog";
-import { Color } from "three";
 import { Bubbles } from "./components/Bubbles/Bubbles";
-import { Global } from "./Global";
 import { RotatingMesh } from "./components/RotatingMesh";
-import { Vector3 } from "three";
 import { VideoScreen } from "./components/VideoScreen";
 import { Stars } from "./components/Stars/Stars";
 import { Glows } from "./components/Glows/Glows";
 import { Fishes } from "./components/Fishes";
 import { ForLife } from "./components/ForLife/ForLife";
+import { TrivialMesh } from "./components/TrivialMesh";
+import { SpinningMesh } from "./components/SpinningMesh";
+import { Moon } from "./components/Moon";
+import { Rocket } from "./components/Rocket";
+import { Earth } from "./components/Earth";
 
 export class Scenario {
   constructor({
@@ -37,41 +41,38 @@ export class Scenario {
         start: 0,
         finish: 4,
       }),
+      new Moon({
+        start: 0,
+        finish: 2,
+        resourceName: 'moon',
+        position: new Vector3(0, .1, 0),
+        scale: .1,
+      }),
 
 
       new Text({
         start: 1,
         message: 'A fuel source so powerful it helped us to travel to the moon.',
       }),
-      new Fog({
-        at: 1,
-        color: 0,
+      new Rocket({
+        start: 1,
+        resourceName: 'rocket',
+        position: new Vector3(-.8, -1, .25),
+        scale: 1,
       }),
-      // new RotatingMesh({
-      //   start: 1,
-      //   resourceName: 'moon',
-      //   // position: new Vector3(3, -5, -10),
-      //   scale: .1,
-      // }),
-      // new RotatingMesh({
-      //   start: 1,
-      //   resourceName: 'rocket',
-      //   position: new Vector3(3, -5, 0),
-      //   scale: 1,
-      // }),
 
 
       new Text({
         start: 2,
         message: 'There is enough to power our planet forever.',
       }),
-      // new RotatingMesh({
-      //   start: 2,
-      //   finish: 5,
-      //   resourceName: 'earth',
-      //   position: new Vector3(3, -5, -100),
-      //   scale: .1,
-      // }),
+      new Earth({
+        start: 1,
+        finish: 4,
+        resourceName: 'earth',
+        position: new Vector3(0, .05, 0),
+        scale: .1,
+      }),
 
 
       new Text({
@@ -87,7 +88,7 @@ export class Scenario {
       }),
       new Fog({
         at: 4,
-        color: 0,
+        color: Global.settings.spaceColor,
       }),
 
 
@@ -128,20 +129,20 @@ export class Scenario {
         start: 8,
         message: 'Storing it safely with the help of a metal hydride.',
       }),
-      // new RotatingMesh({
-      //   start: 8,
-      //   resourceName: 'rug',
-      //   position: new Vector3(0, -5, 20),
-      //   scale: 1.5,
-      //   biasRotation: -Math.PI * .25,
-      // }),
-      // new RotatingMesh({
-      //   start: 8,
-      //   resourceName: 'rug',
-      //   position: new Vector3(0, -5, -20),
-      //   scale: 1.5,
-      //   biasRotation: Math.PI * .75,
-      // }),
+      new RotatingMesh({
+        start: 8,
+        resourceName: 'rug',
+        position: new Vector3(0, -5, 20),
+        scale: 1.5,
+        biasRotation: -Math.PI * .25,
+      }),
+      new RotatingMesh({
+        start: 8,
+        resourceName: 'rug',
+        position: new Vector3(0, -5, -20),
+        scale: 1.5,
+        biasRotation: Math.PI * .75,
+      }),
 
 
       new Text({
@@ -162,12 +163,18 @@ export class Scenario {
         at: 10,
         color: 0x14A3C2,
       }),
-      // new RotatingMesh({
-      //   start: 10,
-      //   resourceName: 'island',
-      //   scale: .5,
-      //   biasRotation: Math.PI * .75,
-      // }),
+      new TrivialMesh({
+        start: 10,
+        resourceName: 'island',
+        position: new Vector3(-.4, -.4, 0),
+        scale: .5,
+      }),
+      new TrivialMesh({
+        start: 10,
+        resourceName: 'island',
+        position: new Vector3(.5, .5, 0),
+        scale: .4,
+      }),
 
 
       // COLUMN 3
@@ -344,14 +351,18 @@ export class Scenario {
 
     ]
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 25; i++) {
       this.items.push(
-        new RotatingMesh({
+        new SpinningMesh({
           start: 0,
           resourceName: 'atom',
-          position: new Vector3(0, 10 + 20 * Math.random(), 100 * Math.random()),
-          scale: .01 + Math.random() * .1,
-          biasRotation: Math.PI * 2 * Math.random(),
+          position: new Vector3(
+            Math.random() - .5,
+            Math.random() - .5,
+            Math.random() * .5,
+          ),
+          rotation: new Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
+          scale: 1 + Math.random() * .1,
         })
       )
     }

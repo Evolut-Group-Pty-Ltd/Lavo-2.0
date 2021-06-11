@@ -13,8 +13,6 @@ export class RenderingPipeline {
     this.resize()
     
     this.renderer.outputEncoding = sRGBEncoding
-    // this.renderer.toneMapping = ACESFilmicToneMapping
-    // this.renderer.toneMappingExposure = 1
 
     container.appendChild(this.renderer.domElement)
 

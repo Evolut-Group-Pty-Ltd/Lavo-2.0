@@ -54,7 +54,8 @@ const gl = new Controller({
 
 new Damped('progress', 0, .02)
 
-console.log("Damped", Damped.values)
+const scrollToProgress = .005
+const maxScroll = 27 / scrollToProgress
 
 const nav = new Nav({
   sections: navSections,
@@ -63,7 +64,7 @@ const nav = new Nav({
     if (typeof sectionData != 'number') {
       progress = sectionData.p
     }
-    updateScrollPosition(progress * 100)
+    updateScrollPosition(progress / scrollToProgress)
   },
 })
 
@@ -93,10 +94,10 @@ const updateScrollPosition = p => {
   if (scrollPosition < 0) {
     scrollPosition = 0
   }
-  if (scrollPosition > 2700) {
-    scrollPosition = 2700
+  if (scrollPosition > maxScroll) {
+    scrollPosition = maxScroll
   }
-  const progress = scrollPosition / 100
+  const progress = scrollPosition * scrollToProgress
   Damped.set('progress', progress)
   // nav.updateProgress(progress)
 }

@@ -1,5 +1,5 @@
-import vertexShader from './basicNoSRGB/vert.glsl'
-import fragmentShader from './basicNoSRGB/frag.glsl'
+import vertexShader from '../materials/basicNoSRGB/vert.glsl'
+import fragmentShader from '../materials/basicNoSRGB/frag.glsl'
 
 import { Mesh, Color, PlaneBufferGeometry, ShaderMaterial, VideoTexture } from "three";
 import { Global } from "../Global";

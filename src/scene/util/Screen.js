@@ -12,6 +12,8 @@ export class Screen {
 
   v2 = new Vector2()
   v4 = new Vector4()
+  box = new Vector2()
+  halfBox = new Vector2()
   debounce = null
 
   debounceResize = () => {
@@ -29,6 +31,12 @@ export class Screen {
     this.aspect = this.x / this.y
     this.v4.z = 1 / this.x
     this.v4.w = 1 / this.y
+
+    const halfVFOV = Math.PI / 180 * Global.settings.fov * .5
+    this.halfBox.y = Global.settings.sceneDepth * Math.tan(halfVFOV)
+    this.halfBox.x = this.aspect * this.halfBox.y
+
+    this.box.copy(this.halfBox).multiplyScalar(2)
 
     Global.eventBus.dispatch('resize', this)
   }

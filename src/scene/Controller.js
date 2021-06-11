@@ -25,7 +25,7 @@ export class Controller {
 
     this.renderPipe = new RenderingPipeline(container)
 
-    this.camera = new PerspectiveCamera(5, Global.screen.aspect, 10, Global.settings.sceneDepth * 2)
+    this.camera = new PerspectiveCamera(Global.settings.fov, Global.screen.aspect, 10, Global.settings.sceneDepth * 2)
     this.camera.position.set(0, 0, Global.settings.sceneDepth)
     this.camera.lookAt(0, 0, 0)
 
