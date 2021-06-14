@@ -51,7 +51,7 @@ export class Scenario {
         start: 0,
         finish: 2,
         resourceName: 'moon',
-        position: new Vector3(0, .15, 0),
+        position: new Vector3(0, .15, -.1),
         scale: 3,
       }),
       new SpaceGradient({
@@ -444,7 +444,7 @@ export class Scenario {
 
       new Text({
         start: 22,
-        message: 'The Lavo Bike',
+        message: 'The LAVO Bike',
         color: black,
       }),
 
@@ -477,7 +477,7 @@ export class Scenario {
 
       new Text({
         start: 25,
-        message: 'The LAVO barbeque',
+        message: 'The LAVO Barbeque',
         color: black,
       }),
 
