@@ -16,6 +16,7 @@ export class RotatingMesh extends Group {
     scale = 1,
     biasRotation = 0,
     finalRotation = 2 * Math.PI,
+    rotateAxis = 'y',
   }) {
     super()
 
@@ -38,6 +39,7 @@ export class RotatingMesh extends Group {
     this.finalRotation = finalRotation
     this.start = start - .5
     this.finish = finish - .5
+    this.rotateAxis = rotateAxis
 
     Global.eventBus.on('update', this.onUpdate)
     Global.eventBus.on('progress', this.onProgress)
@@ -53,6 +55,6 @@ export class RotatingMesh extends Group {
   }
 
   onUpdate = ({ seconds }) => {
-    this.mesh.rotation.y = seconds
+    this.mesh.rotation[this.rotateAxis] = seconds
   }
 }

@@ -1,6 +1,9 @@
+import vertexShader from '../materials/sky/vert.glsl'
+import fragmentShader from '../materials/sky/frag.glsl'
+
 import { rescale } from "../../utils/interpolations"
 import { Global } from "../Global"
-import { Group, Vector3, MeshBasicMaterial } from "three";
+import { Group, Vector3, ShaderMaterial, Color } from "three";
 
 const v3 = new Vector3()
 
@@ -9,11 +12,28 @@ export class Fishes extends Group {
     start,
     finish = start + 1,
     fishNames,
+    count = 7,
     scale = 1,
   }) {
     super()
 
-    const count = 7
+    const material = new ShaderMaterial({
+      uniforms: {
+        color: { value: new Color() },
+        map: { value: null },
+        opacity: { value: 1 },
+        fresnelPower: { value: 1 },
+        fogColor: { value: new Color() },
+        fogNear: { value: 1 },
+        fogFar: { value: 2 },
+      },
+      vertexShader,
+      fragmentShader,
+      fog: true,
+      transparent: true,
+    })
+    this.materials = []
+
     this.fishes = []
 
     for (let i = 0; i < count; i++) {
@@ -23,20 +43,27 @@ export class Fishes extends Group {
       const resourceName = fishNames[Math.floor(Math.random() * fishNames.length)]
 
       const mesh = Global.assets.get(resourceName).scene.clone()
+
+      const depth = Math.random() * .5 * Global.settings.sceneDepth
+      const bounds = Global.screen.getBoundsByDepth(depth)
       mesh.position.set(
-        Math.random() * Global.screen.box.x - Global.screen.halfBox.x,
-        Math.random() * Global.screen.box.y - Global.screen.halfBox.y,
-        Math.random() * 200 - 100
+        (Math.random() * 2 - 1) * bounds.x, 
+        (Math.random() * 2 - 1) * bounds.y,
+        depth,
       )
-      mesh.rotation.set(Math.PI * .5, theta + Math.PI * .5, 0)
-      mesh.scale.setScalar(scale)
-      
+      mesh.rotation.set(Math.PI * .5 + Math.random() * 1 - .5, theta + Math.PI * .5, 0)
+      if (resourceName == 'jellyfish') {
+        mesh.scale.setScalar(scale * .4)
+      } else {
+        mesh.scale.setScalar(scale)
+      }
+    
       mesh.traverse(child => {
         if (child.isMesh) {
-          child.material = new MeshBasicMaterial({
-            color: child.material.color,
-            map: child.material.map,
-          })
+          material.uniforms.color.value = child.material.color
+          material.uniforms.map.value = child.material.map
+          child.material = material.clone()
+          this.materials.push(child.material)
         }
       })
       this.add(mesh)

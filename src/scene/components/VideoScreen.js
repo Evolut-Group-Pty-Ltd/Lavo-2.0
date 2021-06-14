@@ -10,8 +10,10 @@ export class VideoScreen extends Mesh {
     start,
     finish = start + 1,
     video,
+    looped = true,
   }) {
     const $ = Global.assets.get(video)
+    $.loop = looped
     const map = new VideoTexture($)
 
     super(
@@ -44,8 +46,8 @@ export class VideoScreen extends Mesh {
     this.visible = progress > this.start - 1 && progress < this.finish + 1
     if (this.visible) {
       if (!oldVisible) {
-        this.video.play()
         this.video.currentTime = 0
+        this.video.play()
       }
       const p = hold(
         this.start, this.start + .5,

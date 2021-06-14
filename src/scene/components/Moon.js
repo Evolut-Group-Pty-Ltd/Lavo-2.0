@@ -1,5 +1,5 @@
-import vertexShader from '../materials/fresnelBasic/vert.glsl'
-import fragmentShader from '../materials/fresnelBasic/frag.glsl'
+import vertexShader from '../materials/space/vert.glsl'
+import fragmentShader from '../materials/space/frag.glsl'
 
 import { Global } from "../Global"
 import { rescale } from '../../utils/interpolations';

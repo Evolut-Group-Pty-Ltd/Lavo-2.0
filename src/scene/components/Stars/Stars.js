@@ -17,7 +17,7 @@ export class Stars extends Points {
     for (let i = 0, j = 0; j < count; i += 3, j++) {
       positions[i    ] = Math.random() * Global.screen.box.x - Global.screen.halfBox.x
       positions[i + 1] = Math.random() * Global.screen.box.y - Global.screen.halfBox.y
-      positions[i + 2] = 200 * Math.random() - 100
+      positions[i + 2] = 100 * Math.random()
       phases[j] = 23 * Math.random()
     }
     const geometry = new BufferGeometry()
@@ -32,7 +32,7 @@ export class Stars extends Points {
           time: { value: 0 },
           shift: { value: new Vector2() },
         },
-        transparent: true,
+        // transparent: true,
         vertexShader,
         fragmentShader,
       })
@@ -48,10 +48,10 @@ export class Stars extends Points {
 
   onProgress = progress => {
     this.visible = progress >= this.start && progress <= this.finish
-    if (this.visible) {
-      const p = rescale(this.start, this.finish, progress)
-      this.material.uniforms.opacity.value = smoothstep(1, .9, p)
-    }
+    // if (this.visible) {
+    //   const p = rescale(this.start, this.finish, progress)
+    //   this.material.uniforms.opacity.value = smoothstep(1, .9, p)
+    // }
   }
 
   onUpdate = ({ seconds }) => {

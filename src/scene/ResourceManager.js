@@ -43,6 +43,7 @@ export class ResourceManager {
       case 'jpg':
       case 'png':
         return new TextureLoader(this.loadingManager)
+      case 'glb':
       case 'gltf':
         return new GLTFLoader(this.loadingManager)
       case 'msdf':

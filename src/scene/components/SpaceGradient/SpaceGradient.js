@@ -5,6 +5,7 @@ import { Mesh } from "three";
 import { PlaneBufferGeometry } from "three";
 import { Global } from "../../Global";
 import { ShaderMaterial } from "three";
+import { smoothstep } from '../../../utils/interpolations';
 
 export class SpaceGradient extends Mesh {
   constructor({
@@ -16,9 +17,11 @@ export class SpaceGradient extends Mesh {
       new ShaderMaterial({
         uniforms: {
           aspect: { value: Global.screen.aspect },
+          opacity: { value: 1 },
         },
         vertexShader,
         fragmentShader,
+        transparent: true,
       })
     )
 
@@ -31,6 +34,7 @@ export class SpaceGradient extends Mesh {
 
   onProgress = progress => {
     this.visible = progress >= this.start && progress <= this.finish
+    this.material.uniforms.opacity.value = smoothstep(this.start, this.start + .25, progress)
   }
 
   onResize = () => {
