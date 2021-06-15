@@ -5,7 +5,7 @@ export class LearnMore {
   hideTO = -1
 
   updateProgress = progress => {
-    if (progress >= 26.75) {
+    if (progress >= 26.9) {
       if (!this.shown) {
         clearTimeout(this.hideTO)
         this.shown = true
