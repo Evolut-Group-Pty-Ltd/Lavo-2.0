@@ -75,7 +75,7 @@ export class Scenario {
 
       new Text({
         start: 2,
-        message: 'There is enough to power our planet forever',
+        message: 'There is enough hydrogen to power the planet forever',
         spaceGradient: true,
       }),
       new Earth({

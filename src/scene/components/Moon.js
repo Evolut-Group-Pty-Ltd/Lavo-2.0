@@ -50,7 +50,6 @@ export class Moon extends Group {
       }
     })
     this.add(this.mesh)
-    this.add(new AmbientLight(0xffffff, 1))
 
     this.start = start - .5
     this.finish = finish - .5
