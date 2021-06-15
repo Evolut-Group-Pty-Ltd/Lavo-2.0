@@ -8,6 +8,24 @@ import { TextGeometry } from './BMFontText'
 
 const buffer = new Vector3()
 
+const getGeometryWidth = () => {
+  const textBounds = Global.screen.getBoundsByDepth(Global.settings.sceneDepth * .5)
+  const maxWidth = textBounds.x * 4 / 35 * 600
+  return Math.min(600, maxWidth)
+}
+
+const createTextGeometry = ({ width, font, message }) => {
+
+  return new TextGeometry({
+    width,
+    align: 'center',
+    font,
+    text: message,
+    flipY: true,
+    lineHeight: 50,
+  })
+}
+
 export class Text extends Mesh {
 
   static defaultFont = null
@@ -23,14 +41,11 @@ export class Text extends Mesh {
     color = Text.white,
     spaceGradient = false,
   }) {
+    const width = getGeometryWidth()
+    const geometry = createTextGeometry({ width, font, message })
+
     super(
-      new TextGeometry({
-        width: 600,
-        align: 'center',
-        font,
-        text: message,
-        flipY: true,
-      }),
+      geometry,
       new RawShaderMaterial({
         defines: {
           spaceGradient: spaceGradient ? 1 : 0,
@@ -51,14 +66,11 @@ export class Text extends Mesh {
       }),
     )
     
-    this.geometry.computeBoundingBox()
-    this.geometry.boundingBox.getCenter(buffer)
-    const a = this.geometry.attributes.position.array
-    for (let i = 0; i < a.length; i += 2) {
-      a[i] -= buffer.x
-      a[i + 1] -= buffer.y
-    }
+    this.fitGeometry()
 
+    this.font = font
+    this.message = message
+    this.prevWidth = width
     this.rotation.x = Math.PI
     this.scale.setScalar(.05)
     this.visible = false
@@ -70,6 +82,16 @@ export class Text extends Mesh {
 
     Global.eventBus.on('progress', this.onProgress)
     Global.eventBus.on('resize', this.onResize)
+  }
+
+  fitGeometry = () => {
+    this.geometry.computeBoundingBox()
+    this.geometry.boundingBox.getCenter(buffer)
+    const a = this.geometry.attributes.position.array
+    for (let i = 0; i < a.length; i += 2) {
+      a[i] -= buffer.x
+      a[i + 1] -= buffer.y
+    }
   }
   
   onProgress = progress => {
@@ -89,5 +111,19 @@ export class Text extends Mesh {
 
   onResize = () => {
     this.material.uniforms.aspect.value = Global.screen.aspect
+
+    const width = getGeometryWidth()
+
+    if (this.prevWidth != width) {
+      this.geometry.dispose()
+      const geometry = createTextGeometry({
+        width,
+        font: this.font,
+        message: this.message,
+      })
+      this.geometry = geometry
+      this.fitGeometry()
+      this.prevWidth = width
+    }
   }
 }

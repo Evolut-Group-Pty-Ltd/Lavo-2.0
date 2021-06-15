@@ -32,7 +32,6 @@ export class JellyFishes extends Group {
       fog: true,
       transparent: true,
     })
-    this.materials = []
 
     this.fishes = []
 
@@ -58,10 +57,11 @@ export class JellyFishes extends Group {
       
       mesh.traverse(child => {
         if (child.isMesh) {
-          material.uniforms.color.value = child.material.color
-          material.uniforms.map.value = child.material.map
+          const color = child.material.color
+          const map  = child.material.map
           child.material = material.clone()
-          this.materials.push(child.material)
+          child.material.uniforms.color.value = color
+          child.material.uniforms.map.value = map
         }
       })
       this.add(mesh)

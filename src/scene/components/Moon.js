@@ -2,14 +2,14 @@ import vertexShader from '../materials/space/vert.glsl'
 import fragmentShader from '../materials/space/frag.glsl'
 
 import { Global } from "../Global"
-import { rescale } from '../../utils/interpolations';
+import { rescale, smoothstep } from '../../utils/interpolations';
 import { Group, Color, ShaderMaterial } from "three";
 
 export class Moon extends Group {
 
   constructor({
     start,
-    finish = start + 1,
+    finish = start + 2,
     resourceName,
     position,
     scale = 1,
@@ -42,12 +42,15 @@ export class Moon extends Group {
     
     this.mesh.traverse(child => {
       if (child.isMesh) {
-        material.uniforms.color.value = child.material.color
-        material.uniforms.map.value = child.material.map
+        const color = child.material.color
+        const map  = child.material.map
         child.material = material.clone()
+        child.material.uniforms.color.value = color
+        child.material.uniforms.map.value = map
       }
     })
     this.add(this.mesh)
+    this.add(new AmbientLight(0xffffff, 1))
 
     this.start = start - .5
     this.finish = finish - .5
@@ -62,6 +65,9 @@ export class Moon extends Group {
     if (this.visible) {
       const p = rescale(this.start, this.finish, progress)
       this.position.z = p * Global.settings.sceneDepth
+
+      const shiftY = smoothstep(.25, .75, p)
+      this.mesh.position.y = .15 * shiftY * Global.screen.halfBox.y
     }
   }
 

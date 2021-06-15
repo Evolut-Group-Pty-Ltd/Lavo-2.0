@@ -1,7 +1,7 @@
+import { overlays } from './data'
+
 export class Overlay {
-  constructor({
-    overlays,
-  }) {
+  constructor() {
     this.points = []
     overlays.forEach(overlay => {
       this.points[overlay.at] = overlay

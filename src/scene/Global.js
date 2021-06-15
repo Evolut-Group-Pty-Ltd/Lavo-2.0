@@ -1,10 +1,11 @@
-import { EventDispatcher } from "./util/EventDispatcher"
+import { EventDispatcher } from "../utils/EventDispatcher"
+import { ResourceManager } from "./ResourceManager"
 
 export class Global {
   
   static eventBus = new EventDispatcher()
   static screen = null
-  static assets = null
+  static assets = new ResourceManager()
 
   static settings = {
     fov: 5,

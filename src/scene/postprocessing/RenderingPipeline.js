@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, sRGBEncoding, WebGL1Renderer } from "three"
+import { sRGBEncoding, WebGL1Renderer } from "three"
 import { Global } from "../Global"
 
 export class RenderingPipeline {

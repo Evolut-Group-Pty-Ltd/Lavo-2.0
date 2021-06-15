@@ -42,9 +42,9 @@ export class Rocket extends Group {
     
     this.mesh.traverse(child => {
       if (child.isMesh) {
-        // material.uniforms.color.value = child.material.color
-        material.uniforms.map.value = child.material.map
+        const map  = child.material.map
         child.material = material.clone()
+        child.material.uniforms.map.value = map
       }
     })
     this.add(this.mesh)

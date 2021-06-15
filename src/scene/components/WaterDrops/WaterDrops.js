@@ -16,7 +16,7 @@ export class WaterDrops extends Group {
     finish = start + 4,
     swapStart = start + 2,
     swapFinish = start + 3,
-    count = 100,
+    count = 40,
   }) {
     super()
 

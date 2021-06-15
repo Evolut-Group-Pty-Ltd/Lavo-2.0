@@ -3,7 +3,6 @@ import fragmentShader from './frag.glsl'
 
 import { Vector2, Points, BufferGeometry, ShaderMaterial, BufferAttribute } from 'three';
 import { Global } from '../../Global';
-import { rescale, smoothstep } from '../../../utils/interpolations';
 
 export class Stars extends Points {
   constructor({
@@ -15,8 +14,8 @@ export class Stars extends Points {
     const positions = new Float32Array(size)
     const phases = new Float32Array(count)
     for (let i = 0, j = 0; j < count; i += 3, j++) {
-      positions[i    ] = Math.random() * Global.screen.box.x - Global.screen.halfBox.x
-      positions[i + 1] = Math.random() * Global.screen.box.y - Global.screen.halfBox.y
+      positions[i    ] = Math.random() * 2 - 1
+      positions[i + 1] = Math.random() * 2 - 1
       positions[i + 2] = 100 * Math.random()
       phases[j] = 23 * Math.random()
     }
@@ -28,6 +27,7 @@ export class Stars extends Points {
       geometry,
       new ShaderMaterial({
         uniforms: {
+          bounds: { value: Global.screen.halfBox },
           opacity: { value: 0 },
           time: { value: 0 },
           shift: { value: new Vector2() },

@@ -1,28 +1,23 @@
 import { rescale, lerp } from "./utils/interpolations"
+import { navSections } from './data'
 
 export class Nav {
   constructor({
-    sections,
     onNavCallback,
   }) {
-    this.sections = sections
+    this.sections = navSections
     this.onNav = onNavCallback
 
     this.progressData = []
-    Object.keys(sections).forEach(name => {
-      const data = sections[name]
-      let progress, inverse = false
-      if (typeof data == "number") {
-        progress = data
-      } else {
-        progress = data.p
-        inverse = data.inverse
-      }
+    Object.keys(this.sections).forEach(name => {
+      const data = this.sections[name]
+      const progress = data.p
       this.progressData[progress] = {
         section: name,
         sectionStart: progress,
         perc: 0,
-        inverse,
+        inverse: data.inverse,
+        label: data.label,
       }
     })
     let currentData = this.progressData[0]
@@ -35,28 +30,55 @@ export class Nav {
             sectionStart: currentProgress,
             perc: rescale(currentProgress, i, j),
             inverse: currentData.inverse,
+            label: currentData.label,
           }
         }
         currentProgress = i
         currentData = this.progressData[i]
       }
     }
+    this.mobileNavExpanded = false
 
-    this.$nav = document.querySelector('.right-nav')
-    this.$sectionProgress = this.$nav.querySelector(`.section-progress`)
-    this.$sectionCurrent = this.$nav.querySelector(`.section-current`)
+    this.$nav = document.querySelector('.nav')
+    this.$sectionProgress = this.$nav.querySelector('.section-progress')
+    this.$sectionCurrent = this.$nav.querySelector('.section-current')
+    this.$mobileNavOpen = document.querySelector('.mobile-nav.is-closed')
+    this.$mobileSectionCurrent = this.$mobileNavOpen.querySelector('.mobile-section-current')
+    this.$mobileNavClose = document.querySelector('.mobile-nav.is-opened')
+    this.$mobileNavOverlay = document.querySelector('.mobile-nav-overlay')
 
     this.$nav.querySelectorAll('.nav-link').forEach($link => {
       $link.addEventListener('click', e => {
         const section = e.target.getAttribute('data-section')
         this.onNav(this.sections[section])
+        this.collapseMobileNav()
       })
+    })
+
+    this.$mobileNavOpen.addEventListener('click', () => {
+      this.$nav.classList.add('show')
+      this.$mobileNavOverlay.classList.add('show')
+      this.$mobileNavOpen.classList.add('hide')
+      this.$mobileNavClose.classList.add('show')
+      this.mobileNavExpanded = true
+    })
+
+    this.$mobileNavClose.addEventListener('click', () => {
+      this.collapseMobileNav()
     })
 
     this.setActiveSection(this.progressData[0])
   }
 
-  setActiveSection = ({ section: name, inverse }) => {
+  collapseMobileNav = () => {
+    this.$nav.classList.remove('show')
+    this.$mobileNavOverlay.classList.remove('show')
+    this.$mobileNavOpen.classList.remove('hide')
+    this.$mobileNavClose.classList.remove('show')
+    this.mobileNavExpanded = false
+  }
+
+  setActiveSection = ({ section: name, inverse, label }) => {
     if (name != this.activeSection) {
       if (this.activeSection) {
         this.$nav.querySelector(`.nav-link[data-section="${this.activeSection}"`).classList.remove('active')
@@ -71,6 +93,8 @@ export class Nav {
       } else {
         document.body.classList.remove('inverse')
       }
+
+      this.$mobileSectionCurrent.innerHTML = label
     }
   }
 

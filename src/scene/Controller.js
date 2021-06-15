@@ -1,4 +1,3 @@
-import { ResourceManager } from "./ResourceManager";
 import { RenderingPipeline } from "./postprocessing/RenderingPipeline";
 import { Fog, PerspectiveCamera, Scene } from "three";
 import { Screen } from "./util/Screen";
@@ -8,11 +7,8 @@ import { Damped } from "../utils/Damped";
 
 export class Controller {
 
-  constructor({
-    paths,
-  }) {
+  constructor() {
     this.eventBus = Global.eventBus
-    Global.assets = new ResourceManager(paths)
   }
 
   load = () => {
@@ -40,9 +36,9 @@ export class Controller {
     new Damped('pointerY', 0, .1)
   }
 
-  updatePointer = ({ mouse: pointer }) => {
-    Damped.set('pointerX', pointer.x / Global.screen.x * 2 - 1)
-    Damped.set('pointerY', 1 - pointer.y / Global.screen.y * 2)
+  updatePointer = ({ x, y }) => {
+    Damped.set('pointerX', x / Global.screen.x * 2 - 1)
+    Damped.set('pointerY', 1 - y / Global.screen.y * 2)
   }
 
   updateProgress = progress => {

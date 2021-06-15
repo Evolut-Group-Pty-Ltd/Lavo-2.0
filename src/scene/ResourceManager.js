@@ -1,3 +1,4 @@
+import { paths } from '../data'
 import { FontLoader, LoadingManager, TextureLoader } from "three"
 import { GLTFLoader } from "./util/loaders/GLTFLoader"
 import { Global } from "./Global"
@@ -5,8 +6,8 @@ import { MSDFFontLoader } from "./util/loaders/MSDFFontLoader"
 import { VideoLoader } from "./util/loaders/VideoLoader"
 
 export class ResourceManager {
-  constructor(paths) {
-    
+  constructor() {
+
     this.loadingManager = new LoadingManager(
       () =>
         Global.eventBus.dispatch('loading.complete', {}),

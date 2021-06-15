@@ -13,7 +13,7 @@ export class SpaceGradient extends Mesh {
     finish = 4,
   }) {
     super(
-      new PlaneBufferGeometry(Global.screen.box.x, Global.screen.box.y, 1, 1),
+      new PlaneBufferGeometry(1, 1, 1, 1),
       new ShaderMaterial({
         uniforms: {
           aspect: { value: Global.screen.aspect },
@@ -24,6 +24,7 @@ export class SpaceGradient extends Mesh {
         transparent: true,
       })
     )
+    this.onResize()
 
     this.start = start
     this.finish = finish
@@ -38,6 +39,7 @@ export class SpaceGradient extends Mesh {
   }
 
   onResize = () => {
+    this.scale.set(Global.screen.box.x * 1.1, Global.screen.box.y * 1.1, 1)
     this.material.uniforms.aspect.value = Global.screen.aspect
   }
 }

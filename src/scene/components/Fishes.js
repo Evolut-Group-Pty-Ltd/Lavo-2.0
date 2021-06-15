@@ -60,9 +60,11 @@ export class Fishes extends Group {
     
       mesh.traverse(child => {
         if (child.isMesh) {
-          material.uniforms.color.value = child.material.color
-          material.uniforms.map.value = child.material.map
+          const color = child.material.color
+          const map  = child.material.map
           child.material = material.clone()
+          child.material.uniforms.color.value = color
+          child.material.uniforms.map.value = map
           this.materials.push(child.material)
         }
       })
