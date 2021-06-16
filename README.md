@@ -1,1 +1,1 @@
-Check out the bubbles!
+Check out the bubbles! :-)
