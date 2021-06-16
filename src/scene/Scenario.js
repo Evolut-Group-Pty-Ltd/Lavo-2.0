@@ -36,7 +36,7 @@ export class Scenario {
 
       new Text({
         start: 0,
-        message: 'Hydrogen is the most abundant element in the universe',
+        message: 'Hydrogen is the most abundant element in the universe.',
         spaceGradient: true,
       }),
       new Fog({
@@ -44,7 +44,7 @@ export class Scenario {
         color: Global.settings.spaceColor,
       }),
       new Stars({
-        start: 0,
+        start: -1,
         finish: 3.85,
       }),
       new Moon({
@@ -55,14 +55,14 @@ export class Scenario {
         scale: 3,
       }),
       new SpaceGradient({
-        start: -1,
+        start: -100,
         finish: 3.85,
       }),
 
 
       new Text({
         start: 1,
-        message: 'A fuel source so powerful it took us to the moon.',
+        message: 'A fuel source so powerful it took us to the moon',
         spaceGradient: true,
       }),
       new Rocket({
@@ -89,7 +89,7 @@ export class Scenario {
 
       new Text({
         start: 3,
-        message: 'So where on Earth is it? That\'s easy, the world is covered in it.',
+        message: 'So where on Earth is it? That\'s easy, the world is covered in it',
         spaceGradient: true,
       }),
       new Fog({
@@ -150,14 +150,14 @@ export class Scenario {
       new SkyMesh({
         start: 5,
         resourceName: 'cloud',
-        position: new Vector3(-.85, -.35, .05),
+        position: new Vector3(-.85, -.35, -.05),
         rotation: new Euler(0, Math.PI * .75, 0),
         scale: 25,
       }),
       new SkyMesh({
         start: 5,
         resourceName: 'cloud',
-        position: new Vector3(1.35, 1, -.05),
+        position: new Vector3(1.35, 1, .05),
         rotation: new Euler(0, -Math.PI * .15, .23),
         scale: 60,
       }),
@@ -173,14 +173,14 @@ export class Scenario {
       new SkyMesh({
         start: 6,
         resourceName: 'cloud',
-        position: new Vector3(-.76, .1, -.04),
+        position: new Vector3(-1.5, .05, .04),
         rotation: new Euler(0, -Math.PI * .23, -.24),
-        scale: 25,
+        scale: 55,
       }),
       new SkyMesh({
         start: 6,
         resourceName: 'cloud',
-        position: new Vector3(.95, -.6, .075),
+        position: new Vector3(.95, -.6, -.075),
         rotation: new Euler(0, Math.PI * .35, .15),
         scale: 30,
       }),
@@ -205,9 +205,9 @@ export class Scenario {
       new SkyMesh({
         start: 8,
         resourceName: 'cloud',
-        position: new Vector3(-1.25, .5, .03),
-        rotation: new Euler(0, -Math.PI * .23, .4),
-        scale: 25,
+        position: new Vector3(-1.75, .5, .03),
+        rotation: new Euler(0, -Math.PI * .5, .4),
+        scale: 50,
       }),
       new SkyMesh({
         start: 8,
@@ -336,10 +336,6 @@ export class Scenario {
         resourceName: 'jellyfish',
         scale: 7,
       }),
-      new Glows({
-        start: 14,
-        finish: 15,
-      }),
       new Fog({
         at: 14,
         color: 0x0050AD,
@@ -363,23 +359,21 @@ export class Scenario {
         start: 16,
         message: 'Powering our planet with the help of the sun',
       }),
+      new Fog({
+        at: 16,
+        color: 0x24093D,
+      }),
+      new ForLife({
+        start: 16,
+        finish: 19,
+        video: 'unit',
+      }),
 
 
       new Text({
         start: 17,
         message: 'LAVO™ for life',
       }),
-      new ForLife({
-        start: 17,
-        finish: 19,
-        video: 'unit',
-      }),
-      new Fog({
-        at: 16,
-        color: 0x24093D,
-      }),
-
-
       new Fog({
         at: 17,
         color: 0x24093D,
@@ -472,6 +466,7 @@ export class Scenario {
         start: 24,
         video: 'bbq',
         looped: false,
+        delay: 2e3,
       }),
 
 

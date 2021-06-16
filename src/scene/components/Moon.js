@@ -1,5 +1,5 @@
-import vertexShader from '../materials/space/vert.glsl'
-import fragmentShader from '../materials/space/frag.glsl'
+import vertexShader from '../materials/planet/vert.glsl'
+import fragmentShader from '../materials/planet/frag.glsl'
 
 import { Global } from "../Global"
 import { rescale, smoothstep } from '../../utils/interpolations';
@@ -29,7 +29,7 @@ export class Moon extends Group {
       uniforms: {
         color: { value: null },
         map: { value: null },
-        fresnelPower: { value: .75 },
+        fresnelPower: { value: .25 },
         aspect: { value: Global.screen.aspect },
         fogColor: { value: new Color() },
         fogNear: { value: 1 },

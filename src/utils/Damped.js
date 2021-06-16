@@ -2,6 +2,10 @@ export class Damped {
 
   static values = {}
   static set = (name, value) => Damped.values[name].target = value
+  static jump = (name, value) => {
+    Damped.values[name].target = value
+    Damped.values[name].value = value
+  }
   static get = name => Damped.values[name].value
   static update = () => Object.keys(Damped.values).forEach(name => Damped.values[name].update())
 

@@ -99,8 +99,9 @@ export class Nav {
   }
 
   updateProgress = progress => {
-    const cp = Math.ceil(progress)
-    const rp = Math.round(progress)
+    const p = Math.max(progress, 0)
+    const cp = Math.ceil(p)
+    const rp = Math.round(p)
     
     const data = this.progressData[rp]
     this.setActiveSection(data)
@@ -108,7 +109,7 @@ export class Nav {
     let perc = this.progressData[rp].perc
     const nextPerc = this.progressData[cp].perc
     if (rp < cp && cp < this.progressData.length && nextPerc > perc) {
-      perc = lerp(perc, nextPerc, progress - rp)
+      perc = lerp(perc, nextPerc, p - rp)
     }
     this.$sectionProgress.style.height = perc * 32 + 'px'
   }

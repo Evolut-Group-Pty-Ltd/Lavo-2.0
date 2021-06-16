@@ -27,6 +27,7 @@ export class ForLife extends Mesh {
           pointSize: { value: 0 },
           videoSize: { value: 0 },
           insideSize: { value: .1 },
+          insideSizeMax: { value: .11 },
           crownMin: { value: .2 },
           crownMax: { value: .5 },
           // fogColor: { value: new Color() },
@@ -42,8 +43,8 @@ export class ForLife extends Mesh {
     )
 
     this.video = $
-    this.preStart = start - .5
-    this.start = start
+    this.preStart = start - 1.5
+    this.start = start + 1
     this.finish = finish
 
     this.video.pause()
@@ -71,9 +72,10 @@ export class ForLife extends Mesh {
       ))
       this.position.z = (p * .9 + preP * .1) * Global.settings.sceneDepth
       this.material.uniforms.shift.value = Math.max((1 - p * 3) * .1, 0)
-      this.material.uniforms.pointSize.value = 1 / lerp(32. / Global.screen.y, 15, p)
+      this.material.uniforms.pointSize.value = 1 / lerp(64. / Global.screen.y, 15, p)
       this.material.uniforms.videoSize.value = 1 / lerp(0, .75, p)
-      this.material.uniforms.insideSize.value = lerp(.1, .5, Math.max(0, p * 3 - 1))
+      this.material.uniforms.insideSize.value = lerp(.05, .2, Math.max(0, p * 3 - 1))
+      this.material.uniforms.insideSizeMax.value = lerp(.2, .5, Math.max(0, p * 3 - 1))
       this.material.uniforms.crownMin.value = lerp(.2, .1, p * 3)
       this.material.uniforms.crownMax.value = lerp(.5, .25,p * 3)
       this.material.uniforms.opacity.value = smoothstep(1, 2 / 3, p)

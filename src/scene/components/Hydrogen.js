@@ -14,8 +14,8 @@ export class Hydrogen extends Group {
     start,
     finish = start + 1,
     resourceName,
-    position = SpinningMesh.defaultPosition,
-    rotation = SpinningMesh.defaultRotation,
+    position = Hydrogen.defaultPosition,
+    rotation = Hydrogen.defaultRotation,
     scale = 1,
   }) {
     super()

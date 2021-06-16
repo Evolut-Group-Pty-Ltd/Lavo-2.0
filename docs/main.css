@@ -19,6 +19,15 @@ body {
   user-select: none;
 }
 
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 #canvas-container {
   position: fixed;
   width: 100vw;
@@ -32,6 +41,7 @@ body {
   position: fixed;
   left: 6.25rem;
   top: 2.5rem;
+  transition: 1s opacity;
 }
 
 .logo svg path {
@@ -49,7 +59,7 @@ body {
   right: 5rem;
   top: 50%;
   transform: translateY(-50%);
-  transition: .25s color;
+  transition: .25s color, 1s opacity;
 }
 
 .inverse .mobile-nav,
@@ -124,7 +134,7 @@ body {
   transition: .25s color;
   text-decoration: none;
   color: #fff;
-  transition: 250ms transform;
+  transition: 250ms transform, 1s opacity;
 }
 .inverse .products {
   color: #1E1E1E;
@@ -133,8 +143,19 @@ body {
   transform: scale(1.1);
 }
 
+.fast-forward-overlay {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: radial-gradient(circle at center,#2C0F45 0%,#060635 50%);
+  transition: 1s opacity;
+}
+
 .overlay {
-  font-family: 'filson-pro';
+  /* font-family: 'filson-pro'; */
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -151,12 +172,38 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: calc(100% - 4rem);
   max-width: 580px;
   text-align: center;
   font-weight: 400;
 }
+.overlay-content p {
+  display: block;
+  white-space: pre;
+  white-space: break-spaces;
+}
 .overlay-content .header {
   font-weight: 700;
+  font-size: 2rem;
+  line-height: 125%;
+  margin-bottom: 2rem;
+}
+.overlay-open-mobile {
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: 250ms opacity;
+}
+.overlay-close-mobile {
+  position: fixed;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: 250ms opacity;
 }
 
 .mobile-nav,
@@ -207,6 +254,28 @@ body {
   transform: translate(-50%, -50%);
 }
 
+#preloader {
+  opacity: 1;
+  transition: 1s opacity;
+}
+#preloader svg {
+  animation: rotating 2s linear infinite;
+}
+.loading-progress {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: 100ms opacity;
+}
+.central-logo {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: 1s opacity;
+}
+
 @media only screen and (max-width: 768px) {
   .products {
     display: none;
@@ -223,6 +292,7 @@ body {
     position: fixed;
     right: 2rem;
     top: 2rem;
+    transition: 1s opacity;
   }
   .mobile-nav .circle {
     display: inline-block;
@@ -245,4 +315,7 @@ body {
 }
 .hide {
   display: none !important;
+}
+.transparent {
+  opacity: 0 !important;
 }

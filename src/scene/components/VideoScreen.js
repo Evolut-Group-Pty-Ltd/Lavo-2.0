@@ -11,6 +11,7 @@ export class VideoScreen extends Mesh {
     finish = start + 1,
     video,
     looped = true,
+    delay = 0,
   }) {
     const $ = Global.assets.get(video)
     $.loop = looped
@@ -36,6 +37,8 @@ export class VideoScreen extends Mesh {
     this.video = $
     this.start = start - .5
     this.finish = finish - .5
+    this.delay = delay
+    this.playTimeout = -1
     
     this.video.pause()
     Global.eventBus.on('progress', this.onProgress)
@@ -47,7 +50,13 @@ export class VideoScreen extends Mesh {
     if (this.visible) {
       if (!oldVisible) {
         this.video.currentTime = 0
-        this.video.play()
+        if (this.delay == 0) {
+          this.video.play()
+        } else {
+          this.playTimeout = setTimeout(() => {
+            this.video.play()
+          }, this.delay)
+        }
       }
       const p = hold(
         this.start, this.start + .5,
@@ -58,6 +67,7 @@ export class VideoScreen extends Mesh {
       this.material.uniforms.opacity.value = smoothstep(1, .9, p)
     } else {
       if (oldVisible) {
+        clearTimeout(this.playTimeout)
         this.video.pause()
       }
     }

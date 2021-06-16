@@ -12,7 +12,7 @@ export class Fishes extends Group {
     start,
     finish = start + 1,
     fishNames,
-    count = 7,
+    count = 20,
     scale = 1,
   }) {
     super()
@@ -47,16 +47,12 @@ export class Fishes extends Group {
       const depth = Math.random() * .5 * Global.settings.sceneDepth
       const bounds = Global.screen.getBoundsByDepth(depth)
       mesh.position.set(
-        (Math.random() * 2 - 1) * bounds.x, 
-        (Math.random() * 2 - 1) * bounds.y,
+        (Math.random() * 2 - 1) * bounds.x * .5, 
+        (Math.random() * 2 - 1) * bounds.y * .5,
         depth,
       )
-      mesh.rotation.set(Math.PI * .5 + Math.random() * 1 - .5, theta + Math.PI * .5, 0)
-      if (resourceName == 'jellyfish') {
-        mesh.scale.setScalar(scale * .4)
-      } else {
-        mesh.scale.setScalar(scale)
-      }
+      mesh.rotation.set(Math.PI * .5, theta + Math.PI * .5, 0)
+      mesh.scale.setScalar(scale)
     
       mesh.traverse(child => {
         if (child.isMesh) {
@@ -74,7 +70,7 @@ export class Fishes extends Group {
         mesh,
         theta,
         thetaAmp: .5 * Math.random(),
-        speed: 2 + 5 * Math.random(),
+        speed: 5 + 5 * Math.random(),
       })
     }
 
@@ -99,10 +95,12 @@ export class Fishes extends Group {
     const wX = Global.screen.box.x
     const wY = Global.screen.box.y
     this.fishes.forEach(fish => {
-      const theta = fish.theta + Math.sin(seconds) * fish.thetaAmp
+      const theta = fish.theta + Math.sin(seconds) * fish.thetaAmp + seconds * .25
+      const dtheta = Math.cos(seconds) * fish.thetaAmp
       v3.x = Math.cos(theta) * ds * fish.speed
       v3.y = Math.sin(theta) * ds * fish.speed
       fish.mesh.position.add(v3)
+      fish.mesh.rotation.x = dtheta + Math.PI * .5
       fish.mesh.rotation.y = theta + Math.PI * .5
 
       if (fish.mesh.position.x > boundX) {

@@ -12,7 +12,7 @@ export class JellyFishes extends Group {
     start,
     finish = start + 1,
     resourceName,
-    count = 3,
+    count = 10,
     scale = 10,
   }) {
     super()
@@ -48,12 +48,9 @@ export class JellyFishes extends Group {
         (Math.random() * 2 - 1) * bounds.y,
         depth,
       )
-      mesh.rotation.set(Math.PI * .5 + Math.random() * 1 - .5, theta + Math.PI * .5, 0)
-      if (resourceName == 'jellyfish') {
-        mesh.scale.setScalar(scale * .4)
-      } else {
-        mesh.scale.setScalar(scale)
-      }
+      mesh.rotation.order = 'XZY'
+      mesh.rotation.set(Math.PI * .5, theta + Math.PI * .5, 0)
+      mesh.scale.setScalar(scale * .4)
       
       mesh.traverse(child => {
         if (child.isMesh) {
@@ -100,6 +97,7 @@ export class JellyFishes extends Group {
       v3.y = Math.sin(theta) * ds * fish.speed
       fish.mesh.position.add(v3)
       fish.mesh.rotation.y = theta + Math.PI * .5
+      // fish.mesh.rotation.z = seconds * 2
 
       if (fish.mesh.position.x > boundX) {
         fish.mesh.position.x -= wX

@@ -3,6 +3,7 @@ import fragmentShader from './frag.glsl'
 
 import { Vector2, Points, BufferGeometry, ShaderMaterial, BufferAttribute } from 'three';
 import { Global } from '../../Global';
+import { smoothstep, rescale } from '../../../utils/interpolations';
 
 export class Stars extends Points {
   constructor({
@@ -32,7 +33,7 @@ export class Stars extends Points {
           time: { value: 0 },
           shift: { value: new Vector2() },
         },
-        // transparent: true,
+        transparent: true,
         vertexShader,
         fragmentShader,
       })
@@ -48,10 +49,10 @@ export class Stars extends Points {
 
   onProgress = progress => {
     this.visible = progress >= this.start && progress <= this.finish
-    // if (this.visible) {
-    //   const p = rescale(this.start, this.finish, progress)
-    //   this.material.uniforms.opacity.value = smoothstep(1, .9, p)
-    // }
+    if (this.visible) {
+      const p = rescale(this.start, this.finish, progress)
+      this.material.uniforms.opacity.value = smoothstep(0, .1, p)
+    }
   }
 
   onUpdate = ({ seconds }) => {

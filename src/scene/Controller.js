@@ -1,9 +1,10 @@
 import { RenderingPipeline } from "./postprocessing/RenderingPipeline";
-import { Fog, PerspectiveCamera, Scene } from "three";
+import { Fog, PerspectiveCamera, Scene, Vector3, Euler } from "three";
 import { Screen } from "./util/Screen";
 import { Scenario } from "./Scenario";
 import { Global } from "./Global";
 import { Damped } from "../utils/Damped";
+import { Hydrogen } from "./components/Hydrogen";
 
 export class Controller {
 
@@ -34,6 +35,23 @@ export class Controller {
 
     new Damped('pointerX', 0, .1)
     new Damped('pointerY', 0, .1)
+  }
+
+  spawnAtomAt = rect => {
+    const position = new Vector3(
+      (rect.x + rect.width * .5) / Global.screen.v2.x * 2 - 1,
+      1 - (rect.y + rect.height * .5) / Global.screen.v2.y * 2,
+      0,
+    )
+    const atom = new Hydrogen({
+      start: -1,
+      finish: 0,
+      resourceName: 'atom',
+      position,
+      rotation: new Euler(-.5 * Math.PI, 0, 0),
+      scale: 1,
+    })
+    this.scene.add(atom)
   }
 
   updatePointer = ({ x, y }) => {

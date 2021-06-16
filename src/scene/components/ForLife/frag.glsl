@@ -9,6 +9,7 @@ uniform float opacity;
 uniform float crownMin;
 uniform float crownMax;
 uniform float insideSize;
+uniform float insideSizeMax;
 // uniform vec3 fogColor;
 // uniform float fogNear;
 // uniform float fogFar;
@@ -24,7 +25,7 @@ void main() {
   texel += 1. - step(0., videoUV.x) * step(videoUV.x, 1.) * step(0., videoUV.y) * step(videoUV.y, 1.);
   texel = clamp(texel, 0., 1.);
 
-  float inside = step(d, insideSize);
+  float inside = smoothstep(insideSizeMax, insideSize, d);
   float alpha = clamp(smoothstep(crownMax, crownMin, d) * .5 + inside, 0., 1.);
   vec3 c = mix(color, texel, inside);
   gl_FragColor = vec4(c, alpha * opacity);
