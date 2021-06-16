@@ -36,7 +36,7 @@ export class Scenario {
 
       new Text({
         start: 0,
-        message: 'Hydrogen.\nThe most abundant element in the universe.',
+        message: 'Hydrogen is the most abundant element in the universe',
         spaceGradient: true,
       }),
       new Fog({
@@ -367,7 +367,7 @@ export class Scenario {
 
       new Text({
         start: 17,
-        message: 'LAVO for life',
+        message: 'LAVO™ for life',
       }),
       new ForLife({
         start: 17,
@@ -394,7 +394,7 @@ export class Scenario {
       // COLUMN 4
       new Text({
         start: 19,
-        message: 'The LAVO Hydrogen Energy Storage System',
+        message: 'The LAVO™ Hydrogen Energy Storage System',
         color: black,
       }),
       new Fog({
@@ -444,7 +444,7 @@ export class Scenario {
 
       new Text({
         start: 22,
-        message: 'The LAVO Bike',
+        message: 'The LAVO™ Bike',
         color: black,
       }),
 
@@ -477,7 +477,7 @@ export class Scenario {
 
       new Text({
         start: 25,
-        message: 'The LAVO Barbeque',
+        message: 'The LAVO™ Barbeque',
         color: black,
       }),
 
@@ -520,7 +520,7 @@ export class Scenario {
       /// FINAL
       new Text({
         start: 27,
-        message: 'Changing the way we live with energy\nJoin our LAVO community',
+        message: 'Changing the way we live with energy\nJoin our LAVO™ community',
       }),
       new Fog({
         at: 27,

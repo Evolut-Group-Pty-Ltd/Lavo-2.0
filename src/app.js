@@ -91,15 +91,17 @@ const onLoadingComlete = () => {
   const gestures = new Gestures(document.body)
   gestures.on('swipe', ({ start, end }) => {
     const delta = (end.y - start.y) / window.innerHeight * 50
-    updateScrollPosition(scrollPosition + delta)
+    updateScrollPosition(scrollPosition - delta)
     gl.updatePointer(end)
     learnMore.updatePointer(end)
   })
   gestures.on('pinch', ({ zoom }) => {
-    const delta = zoom >= 1 ? zoom : -1 / zoom
-    updateScrollPosition(scrollPosition + delta)
-    gl.updatePointer(end)
-    learnMore.updatePointer(end)
+    if (zoom != 0) {
+      const delta = zoom >= 1 ? zoom : -1 / zoom
+      updateScrollPosition(scrollPosition + delta)
+      gl.updatePointer(end)
+      learnMore.updatePointer(end)
+    }
   })
 
   animFrame = requestAnimationFrame(onFrame)

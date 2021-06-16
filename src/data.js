@@ -2,10 +2,10 @@
 
 export const paths = {
   font: {
-    path: 'fonts/filson-pro-bold-msdf.json',
+    path: 'fonts/avenir-next-lt-pro-demi-msdf.json',
     type: 'msdf',
   },
-  fontMap: 'fonts/filson-pro-bold-patch.png',
+  fontMap: 'fonts/avenir-next-lt-pro-demi.png',
   
   atom: 'models/atom/atom.gltf',
   cloud: 'models/cloud/cloud.gltf',

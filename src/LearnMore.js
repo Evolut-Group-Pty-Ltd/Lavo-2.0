@@ -12,7 +12,6 @@ export class LearnMore {
         setTimeout(() => {
           this.$.style.opacity = 1
           this.width = this.$.clientWidth
-          console.log("LearnMore -> this.width", this.width)
         }, 0)
         this.$.classList.add('show')
       }

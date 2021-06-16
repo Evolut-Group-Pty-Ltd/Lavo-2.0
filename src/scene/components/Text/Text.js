@@ -22,7 +22,6 @@ const createTextGeometry = ({ width, font, message }) => {
     font,
     text: message,
     flipY: true,
-    lineHeight: 50,
   })
 }
 

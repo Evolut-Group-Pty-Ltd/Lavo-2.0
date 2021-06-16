@@ -57,8 +57,9 @@ module.exports.positions = function positions (glyphs) {
     var y = glyph.position[1] + bitmap.yoffset
 
     // quad size
-    var w = bitmap.width
-    var h = bitmap.height
+    const scale = bitmap.scale || 1
+    var w = bitmap.width * scale
+    var h = bitmap.height * scale
 
     // BL
     positions[i++] = x
