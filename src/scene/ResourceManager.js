@@ -31,7 +31,10 @@ export class ResourceManager {
         type = data.type
       }
 
-      this.paths[name] = path
+      this.paths[name] = {
+        path,
+        type,
+      }
       this.loaders[name] = this.getLoader(type)
     })
 
@@ -60,8 +63,8 @@ export class ResourceManager {
   }
 
   load = () => {
-    Object.keys(this.paths).forEach(key => {
-      this.loaders[key].load(this.paths[key], result => this.resources[key] = result)
+    Object.keys(this.paths).forEach(name => {
+      this.loaders[name].load(this.paths[name].path, result => this.resources[name] = result)
     })
   }
 

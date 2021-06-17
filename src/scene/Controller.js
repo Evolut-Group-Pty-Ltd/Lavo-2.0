@@ -54,6 +54,14 @@ export class Controller {
     this.scene.add(atom)
   }
 
+  runVideos = () => {
+    Object.keys(Global.assets.paths).forEach(name => {
+      if (Global.assets.paths[name].type == "mp4") {
+        Global.assets.get(name).play()
+      }
+    })
+  }
+
   updatePointer = ({ x, y }) => {
     Damped.set('pointerX', x / Global.screen.x * 2 - 1)
     Damped.set('pointerY', 1 - y / Global.screen.y * 2)

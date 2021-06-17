@@ -74,6 +74,6 @@ export const overlays = [{
 }, {
   at: 11,
   header: 'Calculation of water to hydrogen to energy',
-  content: '9 litres of water produces enough energy to power the average Australian home for more than a day. That’s 22 Kilowatt hours of electricity.\n \n1 litre of water (H2O) can make 111 grams of Hydrogen (H2)       \n \n1 kilogram of Hydrogen (H2) produces 120 Megajoules (MJ) of energy\n \n1 Megajoules (MJ) creates 166 watts of electricity\n \nThis means a 10 litre bucket of water will make:\n1.11 Kilograms of Hydrogen (H2)\n133.33 Megajoules (MJ) of energy\n22.22 Kilowatt hours of electricity\nPower for days.',
+  content: '9 litres of water produces enough energy to power the average Australian home for more than a day. That’s 22 Kilowatt hours of electricity.\n1 litre of water (H2O) can make 111 grams of Hydrogen (H2)\n1 kilogram of Hydrogen (H2) produces 120 Megajoules (MJ) of energy\n1 Megajoules (MJ) creates 166 watts of electricity\nThis means a 10 litre bucket of water will make:\n1.11 Kilograms of Hydrogen (H2)\n133.33 Megajoules (MJ) of energy\n22.22 Kilowatt hours of electricity\nPower for days.',
   background: 'rgba(44, 169, 209, .95)',
 }, ]

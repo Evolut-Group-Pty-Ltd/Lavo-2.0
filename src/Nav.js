@@ -61,6 +61,8 @@ export class Nav {
       this.$mobileNavOpen.classList.add('hide')
       this.$mobileNavClose.classList.add('show')
       this.mobileNavExpanded = true
+
+      document.querySelector('.products').classList.add('show')
     })
 
     this.$mobileNavClose.addEventListener('click', () => {
@@ -76,6 +78,8 @@ export class Nav {
     this.$mobileNavOpen.classList.remove('hide')
     this.$mobileNavClose.classList.remove('show')
     this.mobileNavExpanded = false
+    
+    document.querySelector('.products').classList.remove('show')
   }
 
   setActiveSection = ({ section: name, inverse, label }) => {

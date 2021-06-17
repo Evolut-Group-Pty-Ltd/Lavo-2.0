@@ -146,29 +146,45 @@ const onLoadingComlete = () => {
     })
   }
 
+  const intro = () => {
+    const preloader = document.getElementById('preloader')
+    preloader.classList.add('transparent')
+  
+    setTimeout(() => {
+      preloader.parentNode.removeChild(preloader)
+  
+      $centralLogo.classList.add('transparent')
+  
+      document.querySelectorAll('.hide').forEach(node => reveal(node))
+  
+      const o = document.querySelector('#central-logo-o')
+      const oRect = o.getBoundingClientRect()
+      gl.spawnAtomAt(oRect)
+  
+      setTimeout(() => {
+        registerListeners()
+        updateScrollPosition(0)
+      }, 1000)
+    }, 1000)
+  }
+
   gl.create({
     container: document.getElementById('canvas-container'),
   })
 
-  const preloader = document.getElementById('preloader')
-  preloader.classList.add('transparent')
-
-  setTimeout(() => {
-    preloader.parentNode.removeChild(preloader)
-
-    $centralLogo.classList.add('transparent')
-
-    document.querySelectorAll('.hide').forEach(node => reveal(node))
-
-    const o = document.querySelector('#central-logo-o')
-    const oRect = o.getBoundingClientRect()
-    gl.spawnAtomAt(oRect)
-
-    setTimeout(() => {
-      registerListeners()
-      updateScrollPosition(0)
-    }, 1000)
-  }, 1000)
+  if (!!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/) && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+    const tts = document.querySelector('.tap-to-start')
+    tts.classList.add('show', 'transparent')
+    setTimeout(() => tts.classList.remove('transparent'), 0)
+    const firstClick = () => {
+      gl.runVideos()
+      intro()
+      window.removeEventListener('touchend', firstClick)
+    }
+    window.addEventListener('touchend', firstClick)
+  } else {
+    intro()
+  }
 
   animFrame = requestAnimationFrame(onFrame)
 }
