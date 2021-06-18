@@ -516,6 +516,7 @@ export class Scenario {
       new Text({
         start: 27,
         message: 'Changing the way we live with energy\nJoin our LAVO™ community',
+        mobileY: .25,
       }),
       new Fog({
         at: 27,

@@ -13,13 +13,13 @@
 </head>
 <body>
   <div id="preloader" style="position:fixed;width:100vw;height:100vh;left:0;top:0;z-index:1000;background:radial-gradient(circle at center,#2C0F45 0%,#060635 50%);">
-    <svg width="187" height="187" viewBox="-9 0 187 187" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);">
-      <circle cx="84" cy="93" r="83" stroke="#E3E3E3" stroke-width="2"/>
-      <path d="M54.5 115.02L49.0455 106.139L47 97.2574L54.5 79.495L68.1364 60.3663L82.4545 59L104.273 60.3663L111.773 71.9802L122 87.0099L118.591 108.871L107.682 123.901L83.8182 128L66.0909 123.901L54.5 115.02Z" fill="#3FA4DC"/>
-      <path d="M73.8 21.1089L71.7636 17.7624L71 14.4158L73.8 7.72277L78.8909 0.514852L84.2364 0L92.3818 0.514852L95.1818 4.89109L99 10.5545L97.7273 18.7921L93.6545 24.4554L84.7455 26L78.1273 24.4554L73.8 21.1089Z" fill="#3FA4DC"/>
-    </svg>
-    <p class="loading-progress hide transparent">0%</p>
-    <div class="tap-to-start">TAP SCREEN TO START</div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);">
+      <div style="width:50px;height:90px;background:rgba(255,255,255,.3);position:relative;">
+        <div id="loading-progress-bar" style="width:40px;height:5px;background:#3FA4DC;position:absolute;left:5px;bottom:5px;"></div>
+      </div>
+      <p class="loading-progress hide transparent"></p>
+    </div>
+    <div class="tap-to-start" style="display:none;">TAP SCREEN TO START</div>
   </div>
   <div id="canvas-container"></div>
   <div class="fast-forward-overlay transparent"></div>

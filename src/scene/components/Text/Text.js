@@ -39,6 +39,7 @@ export class Text extends Mesh {
     fontMap = Text.defaultFont.map,
     color = Text.white,
     spaceGradient = false,
+    mobileY = 0,
   }) {
     const width = getGeometryWidth()
     const geometry = createTextGeometry({ width, font, message })
@@ -78,9 +79,20 @@ export class Text extends Mesh {
     this.start = start - bias - .5
     this.finish = finish + bias - .5
     this.color = color
+    this.mobileY = mobileY
+    
+    this.updateY()
 
     Global.eventBus.on('progress', this.onProgress)
     Global.eventBus.on('resize', this.onResize)
+  }
+
+  updateY = () => {
+    if (Global.screen.mobileLayout) {
+      this.position.y = this.mobileY * Global.screen.halfBox.y * .5
+    } else {
+      this.position.y = 0
+    }
   }
 
   fitGeometry = () => {
@@ -124,5 +136,7 @@ export class Text extends Mesh {
       this.fitGeometry()
       this.prevWidth = width
     }
+
+    this.updateY()
   }
 }

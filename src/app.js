@@ -30,8 +30,10 @@ const gl = new GLController()
 //   console.log(`Error while loading ${url}!`)
 // })
 
-gl.eventBus.on('loading.progress', ({loaded, total}) => {
-  $loadingProgress.innerHTML = `${loaded / total * 100 | 0}%`
+gl.eventBus.on('loading.progress', ({ loaded, total }) => {
+  const p = loaded / total
+  $loadingProgress.innerHTML = `${p * 100 | 0}%`
+  document.querySelector('#loading-progress-bar').style.height = (p * 75 + 5) + 'px'
 })
 
 const onLoadingComlete = () => {

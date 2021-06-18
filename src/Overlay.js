@@ -1,4 +1,5 @@
 import { overlays } from './data'
+import { isMobileLayout } from './utils/layoutTest'
 
 export class Overlay {
   constructor({
@@ -39,7 +40,7 @@ export class Overlay {
     this.shown = true
     this.$content.innerHTML = this.template(this.data)
 
-    if (!this.isMobileLayout()) {
+    if (!isMobileLayout()) {
       this.$closeButton.style.left = this.pointer.x + 'px'
       this.$closeButton.style.top = this.pointer.y + 'px'
     }
@@ -54,14 +55,10 @@ export class Overlay {
     this.onHideOverlay()
   }
 
-  isMobileLayout = () => {
-    return window.innerWidth < 768
-  }
-
   template = data => `<p class="header">${data.header}</p>` + data.content.split('\n').reduce((p,c) => p + `<p>${c}</p>`, '')
 
   updatePointer = ({ x ,y }) => {
-    if (!this.isMobileLayout()) {
+    if (!isMobileLayout()) {
       this.pointer.x = x
       this.pointer.y = y
       if (this.openButtonShown) {
@@ -84,7 +81,7 @@ export class Overlay {
         this.$openButton.classList.add('show')
         this.$openButton.classList.add('transparent')
         setTimeout(() => this.$openButton.classList.remove('transparent'), 0)
-        if (!this.isMobileLayout()) {
+        if (!isMobileLayout()) {
           this.$openButton.style.left = this.pointer.x + 'px'
           this.$openButton.style.top = this.pointer.y + 'px'
         }

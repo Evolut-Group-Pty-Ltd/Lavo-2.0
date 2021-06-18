@@ -128,7 +128,6 @@ body {
 }
 
 .tap-to-start {
-  display: none;
   position: fixed;
   left: 50%;
   bottom: 4rem;
@@ -278,10 +277,9 @@ body {
   animation: rotating 2s linear infinite;
 }
 .loading-progress {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
   transition: 100ms opacity;
 }
 .central-logo {
@@ -323,7 +321,7 @@ body {
     cursor: pointer;
   }
   .learn-more {
-    top: 75%
+    top: 60%;
   }
   .learn-more .social {
     margin-top: 60px;

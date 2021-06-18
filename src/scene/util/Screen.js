@@ -1,5 +1,6 @@
 import { Vector2, Vector4 } from "three"
 import { Global } from "../Global"
+import { isMobileLayout } from "../../utils/layoutTest"
 
 export class Screen {
   constructor(container) {
@@ -15,6 +16,7 @@ export class Screen {
   box = new Vector2()
   halfBox = new Vector2()
   debounce = null
+  mobileLayout = false
 
   debounceResize = () => {
     if (this.debounce !== null) {
@@ -37,6 +39,8 @@ export class Screen {
     this.halfBox.x = this.aspect * this.halfBox.y
 
     this.box.copy(this.halfBox).multiplyScalar(2)
+
+    this.mobileLayout = isMobileLayout()
 
     Global.eventBus.dispatch('resize', this)
   }
