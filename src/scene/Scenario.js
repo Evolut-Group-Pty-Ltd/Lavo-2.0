@@ -36,7 +36,7 @@ export class Scenario {
 
       new Text({
         start: 0,
-        message: 'Hydrogen is the most abundant element in the universe.',
+        message: 'Hydrogen is the most abundant element in the universe',
         spaceGradient: true,
       }),
       new Fog({
@@ -69,7 +69,7 @@ export class Scenario {
         start: 1,
         resourceName: 'rocket',
         position: new Vector3(-.8, -1, .25),
-        scale: 2,
+        scale: 4,
       }),
 
 
@@ -168,7 +168,7 @@ export class Scenario {
 
       new Text({
         start: 6,
-        message: 'Hydrogen & oxygen are the ingredients for water or H₂O',
+        message: 'Hydrogen & Oxygen are the ingredients for water or H₂O',
       }),
       new SkyMesh({
         start: 6,
@@ -479,7 +479,7 @@ export class Scenario {
 
       new Text({
         start: 26,
-        message: 'Cook 150 sausages with just 1 cup of water.',
+        message: 'Cook 150 sausages with just 1 cup of water',
         color: black,
       }),
       new RotatingMesh({
