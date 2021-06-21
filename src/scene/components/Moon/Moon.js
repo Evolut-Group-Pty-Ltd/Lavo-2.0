@@ -1,9 +1,10 @@
-import vertexShader from '../materials/planet/vert.glsl'
-import fragmentShader from '../materials/planet/frag.glsl'
+import vertexShader from '../../materials/planet/vert.glsl'
+import fragmentShader from '../../materials/planet/frag.glsl'
 
-import { Global } from "../Global"
-import { rescale, smoothstep } from '../../utils/interpolations';
+import { Global } from "../../Global"
+import { rescale, smoothstep } from '../../../utils/interpolations';
 import { Group, Color, ShaderMaterial } from "three";
+import { Rocket } from './Rocket';
 
 export class Moon extends Group {
 
@@ -13,6 +14,7 @@ export class Moon extends Group {
     resourceName,
     position,
     scale = 1,
+    rocketResourceName,
   }) {
     super()
 
@@ -51,6 +53,11 @@ export class Moon extends Group {
     })
     this.add(this.mesh)
 
+    this.rocket = new Rocket({
+      resourceName: rocketResourceName,
+    })
+    this.add(this.rocket)
+
     this.start = start - .5
     this.finish = finish - .5
 
@@ -67,6 +74,7 @@ export class Moon extends Group {
 
       const shiftY = smoothstep(.25, .75, p)
       this.mesh.position.y = .15 * shiftY * Global.screen.halfBox.y
+      this.rocket.position.copy(this.mesh.position)
     }
   }
 

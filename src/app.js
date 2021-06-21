@@ -12,6 +12,7 @@ function reveal(domNode) {
   domNode.classList.remove('hide')
   setTimeout(() => domNode.classList.remove('transparent'), 0)
 }
+const isIOS = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/) && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
 
 const startFrom = -1
 const scrollToProgress = .005
@@ -110,12 +111,22 @@ const onLoadingComlete = () => {
 
   const registerListeners = () => {
     window.addEventListener('mousemove', e => {
+      let isOverNav = false
+      let node = e.target
+      while (node !== document.body) {
+        if (node.classList.contains('nav')) {
+          isOverNav = true
+          break
+        }
+        node = node.parentNode
+      }
+
       const mouse = {
         x: e.clientX,
         y: e.clientY,
       }
       gl.updatePointer(mouse)
-      overlay.updatePointer(mouse)
+      overlay.updatePointer(mouse, isOverNav)
       learnMore.updatePointer(mouse)
     })
 
@@ -174,7 +185,7 @@ const onLoadingComlete = () => {
     container: document.getElementById('canvas-container'),
   })
 
-  if (!!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/) && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+  if (isIOS) {
     const tts = document.querySelector('.tap-to-start')
     tts.classList.add('show', 'transparent')
     setTimeout(() => tts.classList.remove('transparent'), 0)

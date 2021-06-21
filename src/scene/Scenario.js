@@ -11,14 +11,12 @@ import { Fishes } from "./components/Fishes";
 import { ForLife } from "./components/ForLife/ForLife";
 import { SkyMesh } from "./components/SkyMesh";
 import { Hydrogen } from "./components/Hydrogen";
-import { Moon } from "./components/Moon";
-import { Rocket } from "./components/Rocket";
+import { Moon } from "./components/Moon/Moon";
 import { Earth } from "./components/Earth/Earth";
 import { SpaceGradient } from "./components/SpaceGradient/SpaceGradient";
 import { WaterDrops } from "./components/WaterDrops/WaterDrops";
 import { MetalHydride } from "./components/MetalHydride";
-import { JellyFishes } from "./components/JellyFishes";
-import { ImageScreen } from "./components/ImageScreen";
+import { JellyFishes } from "./components/JellyFishes/JellyFishes";
 
 export class Scenario {
   constructor({
@@ -53,6 +51,7 @@ export class Scenario {
         resourceName: 'moon',
         position: new Vector3(0, 0, -.1),
         scale: 3,
+        rocketResourceName: 'rocket',
       }),
       new SpaceGradient({
         start: -100,
@@ -64,12 +63,6 @@ export class Scenario {
         start: 1,
         message: 'A fuel source so powerful it took us to the moon',
         spaceGradient: true,
-      }),
-      new Rocket({
-        start: 1,
-        resourceName: 'rocket',
-        position: new Vector3(-.8, -1, .25),
-        scale: 4,
       }),
 
 
@@ -285,6 +278,7 @@ export class Scenario {
         resourceName: 'island',
         position: new Vector3(-1.5, -1.5, -.01),
         scale: 50,
+        mobilePosition: new Vector3(-.2, -1.5, -.01),
       }),
       new SkyMesh({
         start: 10.75,
@@ -292,6 +286,7 @@ export class Scenario {
         resourceName: 'island',
         position: new Vector3(1.2, 1, -.02),
         scale: 45,
+        mobilePosition: new Vector3(.2, 2.75, -.01),
       }),
 
 
@@ -389,6 +384,7 @@ export class Scenario {
       new Text({
         start: 19,
         message: 'The LAVO™ Hydrogen Energy Storage System',
+        mobileMessage: 'The LAVO™\nHydrogen Energy Storage System',
         color: black,
       }),
       new Fog({
@@ -416,18 +412,6 @@ export class Scenario {
         scale: 7.5,
         biasRotation: Math.PI * .65,
       }),
-      new ImageScreen({
-        start: 20,
-        image: 'bathtub',
-        position: new Vector3(-.3, .7, -.1),
-        size: 10,
-      }),
-      new ImageScreen({
-        start: 20,
-        image: 'house',
-        position: new Vector3(.3, -.7, -.1),
-        size: 10,
-      }),
 
 
       new VideoScreen({
@@ -448,18 +432,6 @@ export class Scenario {
         message: 'Ride from Sydney to Canberra powered by 2 bottles of water',
         color: black,
       }),
-      new ImageScreen({
-        start: 23,
-        image: 'bottles',
-        position: new Vector3(-.3, .7, -.1),
-        size: 10,
-      }),
-      new ImageScreen({
-        start: 23,
-        image: 'cyclist',
-        position: new Vector3(.3, -.7, -.1),
-        size: 10,
-      }),
 
 
       new VideoScreen({
@@ -473,6 +445,7 @@ export class Scenario {
       new Text({
         start: 25,
         message: 'The LAVO™ Barbeque',
+        mobileMessage: 'The LAVO™\nBarbeque',
         color: black,
       }),
 
@@ -497,18 +470,6 @@ export class Scenario {
         scale: 7,
         biasRotation: Math.PI * .75,
         rotateAxis: 'x',
-      }),
-      new ImageScreen({
-        start: 26,
-        image: 'bbqImage',
-        position: new Vector3(-.3, .7, -.1),
-        size: 10,
-      }),
-      new ImageScreen({
-        start: 26,
-        image: 'glassWater',
-        position: new Vector3(.3, -.7, -.1),
-        size: 10,
       }),
 
 

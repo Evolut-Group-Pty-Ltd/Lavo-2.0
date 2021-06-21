@@ -1,8 +1,8 @@
-import vertexShader from '../materials/sky/vert.glsl'
-import fragmentShader from '../materials/sky/frag.glsl'
+import vertexShader from './vert.glsl'
+import fragmentShader from './frag.glsl'
 
-import { rescale } from "../../utils/interpolations"
-import { Global } from "../Global"
+import { rescale } from "../../../utils/interpolations"
+import { Global } from "../../Global"
 import { Group, Vector3, ShaderMaterial, Color } from "three";
 
 const v3 = new Vector3()
@@ -12,7 +12,7 @@ export class JellyFishes extends Group {
     start,
     finish = start + 1,
     resourceName,
-    count = 10,
+    count = 20,
     scale = 10,
   }) {
     super()
@@ -22,6 +22,7 @@ export class JellyFishes extends Group {
         color: { value: new Color() },
         map: { value: null },
         opacity: { value: 1 },
+        time: { value: 0 },
         fresnelPower: { value: 1 },
         fogColor: { value: new Color() },
         fogNear: { value: 1 },
@@ -48,8 +49,8 @@ export class JellyFishes extends Group {
         (Math.random() * 2 - 1) * bounds.y,
         depth,
       )
-      mesh.rotation.order = 'XZY'
-      mesh.rotation.set(Math.PI * .5, theta + Math.PI * .5, 0)
+      mesh.rotation.order = 'ZXY'
+      mesh.rotation.set(Math.random() * Math.PI, 0, theta + Math.PI * .5)
       mesh.scale.setScalar(scale * .4)
       
       mesh.traverse(child => {
@@ -96,8 +97,7 @@ export class JellyFishes extends Group {
       v3.x = Math.cos(theta) * ds * fish.speed
       v3.y = Math.sin(theta) * ds * fish.speed
       fish.mesh.position.add(v3)
-      fish.mesh.rotation.y = theta + Math.PI * .5
-      // fish.mesh.rotation.z = seconds * 2
+      fish.mesh.rotation.z = theta
 
       if (fish.mesh.position.x > boundX) {
         fish.mesh.position.x -= wX
@@ -111,6 +111,12 @@ export class JellyFishes extends Group {
       if (fish.mesh.position.y < -boundY) {
         fish.mesh.position.y += wY
       }
+
+      fish.mesh.traverse(child => {
+        if (child.isMesh) {
+          child.material.uniforms.time.value = seconds * 2
+        }
+      })
     })
   }
 }

@@ -57,13 +57,18 @@ export class Overlay {
 
   template = data => `<p class="header">${data.header}</p>` + data.content.split('\n').reduce((p,c) => p + `<p>${c}</p>`, '')
 
-  updatePointer = ({ x ,y }) => {
+  updatePointer = ({ x, y }, isOverNav) => {
     if (!isMobileLayout()) {
       this.pointer.x = x
       this.pointer.y = y
       if (this.openButtonShown) {
         this.$openButton.style.left = x + 'px'
         this.$openButton.style.top = y + 'px'
+        if (isOverNav) {
+          this.$openButton.classList.remove('show')
+        } else {
+          this.$openButton.classList.add('show')
+        }
       }
       if (this.shown) {
         this.$closeButton.style.left = x + 'px'

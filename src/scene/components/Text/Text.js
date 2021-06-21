@@ -15,7 +15,6 @@ const getGeometryWidth = () => {
 }
 
 const createTextGeometry = ({ width, font, message }) => {
-
   return new TextGeometry({
     width,
     align: 'center',
@@ -40,9 +39,14 @@ export class Text extends Mesh {
     color = Text.white,
     spaceGradient = false,
     mobileY = 0,
+    mobileMessage = message,
   }) {
     const width = getGeometryWidth()
-    const geometry = createTextGeometry({ width, font, message })
+    const geometry = createTextGeometry({
+      width,
+      font,
+      message: Global.screen.mobileLayout ? mobileMessage : message,
+    })
 
     super(
       geometry,
@@ -70,6 +74,7 @@ export class Text extends Mesh {
 
     this.font = font
     this.message = message
+    this.mobileMessage = mobileMessage
     this.prevWidth = width
     this.rotation.x = Math.PI
     this.scale.setScalar(.05)
@@ -130,7 +135,7 @@ export class Text extends Mesh {
       const geometry = createTextGeometry({
         width,
         font: this.font,
-        message: this.message,
+        message: Global.screen.mobileLayout ? this.mobileMessage : this.message,
       })
       this.geometry = geometry
       this.fitGeometry()

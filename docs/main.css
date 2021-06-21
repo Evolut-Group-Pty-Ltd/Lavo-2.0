@@ -134,12 +134,12 @@ body {
   transform: translateX(-50%);
   color: #000;
   font-weight: 700;
-  line-height: 5rem;
+  line-height: 3rem;
   text-align: center;
-  width: 14rem;
-  height: 5rem;
+  width: 14.5rem;
+  height: 3rem;
   background: #fff;
-  border-radius: 2.5rem;
+  border-radius: 1.5rem;
 }
 
 .products {
@@ -196,6 +196,7 @@ body {
   display: block;
   white-space: pre;
   white-space: break-spaces;
+  min-height: 1em;
 }
 .overlay-content .header {
   font-weight: 700;
@@ -246,11 +247,21 @@ body {
   transition: 500ms opacity, 100ms transform;
 }
 .learn-more .cta {
-  transform: scale(.9);
+  display: block;
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+  line-height: 3rem;
+  text-align: center;
+  width: 10.5rem;
+  height: 3rem;
+  background: #fff;
+  border-radius: 1.5rem;
+  transform: scale(1);
   transition: 250ms transform;
 }
 .learn-more .cta:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 .learn-more .social {
   margin-top: 120px;
@@ -261,6 +272,11 @@ body {
   margin: 0 .5rem;
   width: 1.5rem;
   height: 1.5rem;
+  transform: scale(1);
+  transition: 250ms transform;
+}
+.learn-more .social a:hover {
+  transform: scale(1.1);
 }
 .learn-more .social a svg {
   position: absolute;

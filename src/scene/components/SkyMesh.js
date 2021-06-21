@@ -16,19 +16,15 @@ export class SkyMesh extends Group {
     position,
     rotation = SkyMesh.defaultRotation,
     scale = 1,
+    mobilePosition = position,
   }) {
     super()
 
     this.mesh = Global.assets.get(resourceName).scene.clone()
 
-    const depth = position.z * Global.settings.sceneDepth
-    const bounds = Global.screen.getBoundsByDepth(depth)
-
-    this.mesh.position.set(
-      position.x * bounds.y * 1.777, 
-      position.y * bounds.y,
-      depth,
-    )
+    this.initialPosition = position
+    this.mobilePosition = mobilePosition
+    this.updateMeshPosition()
     this.mesh.rotation.copy(rotation)
     this.mesh.rotation.x += .5 * Math.PI
     this.mesh.scale.setScalar(scale)
@@ -61,21 +57,35 @@ export class SkyMesh extends Group {
       }
     })
     this.add(this.mesh)
-
     this.start = start - .5
     this.finish = finish - .5
 
     Global.eventBus.on('progress', this.onProgress)
+    Global.eventBus.on('resize', this.updateMeshPosition)
   }
   
+  updateMeshPosition = () => {
+    const position = Global.screen.mobileLayout ? this.mobilePosition : this.initialPosition
+
+    const depth = position.z * Global.settings.sceneDepth
+    const bounds = Global.screen.getBoundsByDepth(depth)
+
+    this.mesh.position.set(
+      position.x * bounds.y * 1.777, 
+      position.y * bounds.y,
+      depth,
+    )
+
+  }
+
   onProgress = progress => {
     this.visible = progress >= this.start - .5 && progress < this.finish + .5
     if (this.visible) {
       const p = rescale(this.start, this.finish, progress)
       this.position.z = p * Global.settings.sceneDepth
       const opacity = smoothstep(1, .5, p)
-      this.materials.forEach(m => {
-        m.uniforms.opacity.value = opacity
+      this.materials.forEach(material => {
+        material.uniforms.opacity.value = opacity
       })
     }
   }

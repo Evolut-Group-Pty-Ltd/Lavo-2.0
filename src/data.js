@@ -20,12 +20,12 @@ export const paths = {
   moon: 'models/moon/moon.gltf',
   rocket: 'models/rocket/rocket.gltf',
 
-  bathtub: 'images/bathtub.png',
-  house: 'images/house.png',
-  bottles: 'images/bottles.png',
-  cyclist: 'images/cyclist.png',
-  bbqImage: 'images/bbq.png',
-  glassWater: 'images/glass-water.png',
+  // bathtub: 'images/bathtub.png',
+  // house: 'images/house.png',
+  // bottles: 'images/bottles.png',
+  // cyclist: 'images/cyclist.png',
+  // bbqImage: 'images/bbq.png',
+  // glassWater: 'images/glass-water.png',
   
   bbq: 'video/bbq.mp4',
   bike: 'video/bike.mp4',
@@ -59,12 +59,12 @@ export const navSections = {
 export const overlays = [{
   at: 7,
   header: 'LAVO™ uses an electrolyser to split water into hydrogen and oxygen',
-  content: 'We use an electrolyser to convert excess electrical energy from the solar system through electrolysis, where the water is split into hydrogen and oxygen. This occurs through the electrical charge being applied to the water, causing it to break the chemical bond between the hydrogen and oxygen atoms and produce particles called ions. The energy is then stored as hydrogen and the oxygen is released into the atmosphere.',
+  content: 'We use an electrolyser to convert excess electrical energy from the solar system through electrolysis, where the water is split into hydrogen and oxygen.\n\nThis occurs through the electrical charge being applied to the water, causing it to break the chemical bond between the hydrogen and oxygen atoms and produce particles called ions. The energy is then stored as hydrogen and the oxygen is released into the atmosphere.',
   background: 'rgba(119, 190, 255, .95)',
 }, {
   at: 8,
   header: 'Storing hydrogen safely with a metal hydride',
-  content: 'Metal hydrides are a compact and safe way to store hydrogen at low pressure and room temperature.​​​\nLAVO™ use an innovative and patented hydride formula that is a unique combination of common minerals to make an alloy. Hydrogen atoms bond to the alloy enabling safe and non-flammable storage that is energy efficient, carbon neutral and fully recyclable.',
+  content: 'Metal hydrides are a compact and safe way to store hydrogen at low pressure and room temperature.​​​\n\nLAVO™ use an innovative and patented hydride formula that is a unique combination of common minerals to make an alloy. Hydrogen atoms bond to the alloy enabling safe and non-flammable storage that is energy efficient, carbon neutral and fully recyclable.',
   background: 'rgba(119, 190, 255, .95)',
 }, {
   at: 9,
@@ -74,6 +74,6 @@ export const overlays = [{
 }, {
   at: 11,
   header: 'Calculation of water to hydrogen to energy',
-  content: '9 litres of water produces enough energy to power the average Australian home for more than a day. That’s 22 Kilowatt hours of electricity.\n1 litre of water (H2O) can make 111 grams of Hydrogen (H2)\n1 kilogram of Hydrogen (H2) produces 120 Megajoules (MJ) of energy\n1 Megajoules (MJ) creates 166 watts of electricity\nThis means a 10 litre bucket of water will make:\n1.11 Kilograms of Hydrogen (H2)\n133.33 Megajoules (MJ) of energy\n22.22 Kilowatt hours of electricity\nPower for days.',
+  content: '9 litres of water produces enough energy to power the average Australian home for more than a day. That’s 22 Kilowatt hours of electricity.\n\n1 litre of water (H2O) can make 111 grams of Hydrogen (H2)\n1 kilogram of Hydrogen (H2) produces 120 Megajoules (MJ) of energy\n1 Megajoules (MJ) creates 166 watts of electricity\nThis means a 10 litre bucket of water will make:\n1.11 Kilograms of Hydrogen (H2)\n133.33 Megajoules (MJ) of energy\n22.22 Kilowatt hours of electricity\nPower for days.',
   background: 'rgba(44, 169, 209, .95)',
 }, ]
