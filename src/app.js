@@ -8,6 +8,13 @@ import { Overlay } from './Overlay';
 import { LearnMore } from './LearnMore';
 import { Gestures } from './utils/Gestures';
 
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+  dataLayer.push(arguments)
+}
+gtag('js', new Date())
+gtag('config', 'G-DWSDKGZRB4')
+
 function reveal(domNode) {
   domNode.classList.remove('hide')
   setTimeout(() => domNode.classList.remove('transparent'), 0)
@@ -18,6 +25,7 @@ const startFrom = -1
 const scrollToProgress = .005
 const maxScroll = 27 / scrollToProgress
 let scrollPosition = startFrom / scrollToProgress, animFrame
+let gtagScreen = Number.MIN_SAFE_INTEGER
 
 new Damped('progress', startFrom, .02)
 
@@ -68,6 +76,12 @@ const onLoadingComlete = () => {
 
     gl.onFrame(time)
     
+    if (gtagScreen != Math.round(progress)) {
+      gtagScreen = Math.round(progress)
+      const event = `screen-${gtagScreen + 4}`
+      gtag({ event })
+    }
+
     animFrame = requestAnimationFrame(onFrame)
   }
 
