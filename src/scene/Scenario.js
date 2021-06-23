@@ -138,7 +138,8 @@ export class Scenario {
       new Text({
         start: 5,
         finish: 6,
-        message: 'It\'s in our water - a source of life and energy',
+        message: 'It\'s in our water - a source\nof life and energy',
+        mobileMessage: 'It\'s in our water - a source of life and energy',
       }),
       new SkyMesh({
         start: 5,
@@ -231,7 +232,7 @@ export class Scenario {
         scale: 35,
       }),
       new SkyMesh({
-        start: 9.75,
+        start: 10,
         finish: 11,
         resourceName: 'cloud',
         position: new Vector3(-.9, -.75, .01),
@@ -239,7 +240,7 @@ export class Scenario {
         scale: 25,
       }),
       new SkyMesh({
-        start: 9.5,
+        start: 10.25,
         finish: 11,
         resourceName: 'cloud',
         position: new Vector3(0, .2, -.05),
@@ -247,8 +248,8 @@ export class Scenario {
         scale: 30,
       }),
       new SkyMesh({
-        start: 10,
-        finish: 11,
+        start: 10.5,
+        finish: 11.25,
         resourceName: 'cloud',
         position: new Vector3(.3, -.5, .02),
         rotation: new Euler(0, Math.PI * .25, .072),
@@ -266,7 +267,8 @@ export class Scenario {
 
       new Text({
         start: 11,
-        message: 'Creating lots of energy to power the world',
+        message: 'Creating lots of energy\nto power the world',
+        mobileMessage: 'Creating lots of energy to power the world',
       }),
       new Fog({
         at: 11,
@@ -367,7 +369,7 @@ export class Scenario {
 
       new Text({
         start: 17,
-        message: 'LAVO™ for life',
+        message: 'LAVO™ FOR LIFE',
       }),
       new Fog({
         at: 17,
@@ -452,7 +454,8 @@ export class Scenario {
 
       new Text({
         start: 26,
-        message: 'Cook 150 sausages with just 1 cup of water',
+        message: 'Cook 150 sausages\nwith just 1 cup of water',
+        mobileMessage: 'Cook 150 sausages with just 1 cup of water',
         color: black,
       }),
       new RotatingMesh({
@@ -476,7 +479,8 @@ export class Scenario {
       /// FINAL
       new Text({
         start: 27,
-        message: 'Changing the way we live with energy\nJoin our LAVO™ community',
+        message: 'Changing the way\nwe live with energy\nJoin our LAVO™ community',
+        mobileMessage: 'Changing the way we live with energy\nJoin our LAVO™ community',
         mobileY: .25,
       }),
       new Fog({

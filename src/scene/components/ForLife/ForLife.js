@@ -44,7 +44,7 @@ export class ForLife extends Mesh {
 
     this.video = $
     this.preStart = start - 1.5
-    this.start = start + 1
+    this.start = start + 1.5
     this.finish = finish
 
     this.video.pause()

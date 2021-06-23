@@ -9,7 +9,7 @@ export const paths = {
   
   atom: 'models/atom/atom.gltf',
   cloud: 'models/cloud/cloud.gltf',
-  duck: 'models/duck/duck.gltf',
+  duck: 'models/duck3/rubberduckv3.gltf',
   earth: 'models/earth/earth.glb',
   fishA: 'models/fishA/fishA.gltf',
   fishB: 'models/fishB/fishB.gltf',

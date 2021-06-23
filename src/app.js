@@ -9,11 +9,9 @@ import { LearnMore } from './LearnMore';
 import { Gestures } from './utils/Gestures';
 
 window.dataLayer = window.dataLayer || [];
-function gtag() {
-  dataLayer.push(arguments)
+export function gtag(a) {
+  dataLayer.push(a)
 }
-gtag('js', new Date())
-gtag('config', 'G-DWSDKGZRB4')
 
 function reveal(domNode) {
   domNode.classList.remove('hide')
@@ -57,7 +55,11 @@ const onLoadingComlete = () => {
   })
 
   const overlay = new Overlay({
-    onShowOverlay: () => { ignoreInput = true },
+    onShowOverlay: () => {
+      ignoreInput = true
+      const event = `Screen ${gtagScreen + 4}a`
+      gtag({ event })
+    },
     onHideOverlay: () => { ignoreInput = false },
   })
 
@@ -78,7 +80,7 @@ const onLoadingComlete = () => {
     
     if (gtagScreen != Math.round(progress)) {
       gtagScreen = Math.round(progress)
-      const event = `screen-${gtagScreen + 4}`
+      const event = `Screen ${gtagScreen + 4}`
       gtag({ event })
     }
 
@@ -220,3 +222,6 @@ gl.eventBus.on('loading.complete', onLoadingComlete)
 gl.load()
 
 reveal($loadingProgress)
+gtag({ event: 'Screen 1' })
+
+document.querySelector('.cta').addEventListener('click', () => gtag({ event: 'Screen 31 button' }))
