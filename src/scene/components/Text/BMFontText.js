@@ -2,7 +2,7 @@ import { BufferGeometry, BufferAttribute, Sphere, Box3 } from 'three'
 
 // I love tree-shaking, had to do this
 
-var createLayout = require('layout-bmfont-text')
+var createLayout = require('./lib/layout-bmfont-text')
 var createIndices = require('quad-indices')
 
 var vertices = require('./lib/vertices')
