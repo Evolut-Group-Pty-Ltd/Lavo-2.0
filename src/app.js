@@ -8,10 +8,10 @@ import { Overlay } from './Overlay';
 import { LearnMore } from './LearnMore';
 import { Gestures } from './utils/Gestures';
 
-window.dataLayer = window.dataLayer || [];
-export function gtag(a) {
-  dataLayer.push(a)
-}
+// window.dataLayer = window.dataLayer || [];
+// export function gtag(a) {
+//   dataLayer.push(a)
+// }
 
 function reveal(domNode) {
   domNode.classList.remove('hide')
