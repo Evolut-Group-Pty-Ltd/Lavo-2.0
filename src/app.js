@@ -8,11 +8,6 @@ import { Overlay } from './Overlay';
 import { LearnMore } from './LearnMore';
 import { Gestures } from './utils/Gestures';
 
-// window.dataLayer = window.dataLayer || [];
-// export function gtag(a) {
-//   dataLayer.push(a)
-// }
-
 function reveal(domNode) {
   domNode.classList.remove('hide')
   setTimeout(() => domNode.classList.remove('transparent'), 0)
@@ -58,7 +53,7 @@ const onLoadingComlete = () => {
     onShowOverlay: () => {
       ignoreInput = true
       const event = `Screen ${gtagScreen + 4}a`
-      gtag({ event })
+      gtag('event', event, {});
     },
     onHideOverlay: () => { ignoreInput = false },
   })
@@ -81,7 +76,7 @@ const onLoadingComlete = () => {
     if (gtagScreen != Math.round(progress)) {
       gtagScreen = Math.round(progress)
       const event = `Screen ${gtagScreen + 4}`
-      gtag({ event })
+      gtag('event', event, {});
     }
 
     animFrame = requestAnimationFrame(onFrame)
@@ -222,9 +217,6 @@ gl.eventBus.on('loading.complete', onLoadingComlete);
 gl.load()
 
 reveal($loadingProgress)
-// gtag({ event: 'Screen 1' })
-// gtag('event', 'Screen 1', {});
-gtag('event', 'view_item', { event_category: 'engagement', event_action: 'view_item', event_label: 'Screen 1', event_value: 1 });
+gtag('event', 'Screen 1', {});
 
-// document.querySelector('.cta').addEventListener('click', () => gtag({ event: 'Screen 31 button' }))
 document.querySelector('.cta').addEventListener('click', () => gtag('event', 'Screen 31 button', {}));
