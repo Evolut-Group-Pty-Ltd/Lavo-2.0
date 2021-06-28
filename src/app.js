@@ -223,7 +223,8 @@ gl.load()
 
 reveal($loadingProgress)
 // gtag({ event: 'Screen 1' })
-gtag('event', 'Screen 1', {});
+// gtag('event', 'Screen 1', {});
+gtag('event', 'view_item', { event_category: 'engagement', event_action: 'view_item', event_label: 'Screen 1', event_value: 1 });
 
 // document.querySelector('.cta').addEventListener('click', () => gtag({ event: 'Screen 31 button' }))
 document.querySelector('.cta').addEventListener('click', () => gtag('event', 'Screen 31 button', {}));
