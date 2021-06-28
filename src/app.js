@@ -218,10 +218,12 @@ const onLoadingComlete = () => {
   animFrame = requestAnimationFrame(onFrame)
 }
 
-gl.eventBus.on('loading.complete', onLoadingComlete)
+gl.eventBus.on('loading.complete', onLoadingComlete);
 gl.load()
 
 reveal($loadingProgress)
-gtag({ event: 'Screen 1' })
+// gtag({ event: 'Screen 1' })
+gtag('event', 'Screen 1', {});
 
-document.querySelector('.cta').addEventListener('click', () => gtag({ event: 'Screen 31 button' }))
+// document.querySelector('.cta').addEventListener('click', () => gtag({ event: 'Screen 31 button' }))
+document.querySelector('.cta').addEventListener('click', () => gtag('event', 'Screen 31 button', {}));
