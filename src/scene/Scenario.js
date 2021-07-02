@@ -82,7 +82,8 @@ export class Scenario {
 
       new Text({
         start: 3,
-        message: 'So where on Earth is it? That\'s easy, the world is covered in it',
+        message: 'So where on Earth is it?\nThat\'s easy, the world is covered in it',
+        mobileMessage: 'So where on Earth\n is it?\nThat\'s easy, the world is covered in it',
         spaceGradient: true,
       }),
       new Fog({
