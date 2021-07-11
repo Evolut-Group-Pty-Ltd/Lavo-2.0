@@ -154,7 +154,7 @@ const onLoadingComlete = () => {
         return
       }
       const delta = (end.y - start.y) / window.innerHeight * 50
-      updateScrollPosition(scrollPosition - delta * 0.2)
+      updateScrollPosition(scrollPosition - delta * 0.3)
       gl.updatePointer(end)
     })
 
