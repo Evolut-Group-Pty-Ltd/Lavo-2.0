@@ -27,9 +27,9 @@ export const paths = {
   // bbqImage: 'images/bbq.png',
   // glassWater: 'images/glass-water.png',
   
-  bbq: 'video/bbq.mp4',
-  bike: 'video/bike.mp4',
-  unit: 'video/unit.mp4',
+  bbq: 'https://lavo-microsite-videos.s3.ap-southeast-2.amazonaws.com/bbq.mp4',
+  bike: 'https://lavo-microsite-videos.s3.ap-southeast-2.amazonaws.com/bike.mp4',
+  unit: 'https://lavo-microsite-videos.s3.ap-southeast-2.amazonaws.com/unit.mp4',
 }
 
 export const navSections = {
