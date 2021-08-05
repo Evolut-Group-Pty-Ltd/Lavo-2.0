@@ -1,3 +1,4 @@
+import { logoSvg } from "./scene/components/Logo.js";
 //a bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=\,./;'\[]|<>?:"|{}₂’-—–
 
 export const paths = {
@@ -6,7 +7,7 @@ export const paths = {
     type: 'msdf',
   },
   fontMap: 'fonts/avenir-next-lt-pro-demi.png',
-  
+
   atom: 'models/atom/atom.gltf',
   cloud: 'models/cloud/cloud.gltf',
   duck: 'models/duck3/rubberduckv3.gltf',
@@ -26,7 +27,7 @@ export const paths = {
   // cyclist: 'images/cyclist.png',
   // bbqImage: 'images/bbq.png',
   // glassWater: 'images/glass-water.png',
-  
+
   bbq: 'https://lavo-microsite-videos.s3.ap-southeast-2.amazonaws.com/bbq.mp4',
   bike: 'https://lavo-microsite-videos.s3.ap-southeast-2.amazonaws.com/bike.mp4',
   unit: 'https://lavo-microsite-videos.s3.ap-southeast-2.amazonaws.com/unit.mp4',
@@ -57,6 +58,11 @@ export const navSections = {
 }
 
 export const overlays = [{
+  at: -1,
+  header: '<div class="overlay-logo">' + logoSvg + '</div><p class="header">Scroll to begin the LAVO™ journey</p>',
+  content: '',
+  background: 'rgba(119, 190, 255, .95)',
+}, {
   at: 7,
   header: 'LAVO™ uses an electrolyser to split water into hydrogen and oxygen',
   content: 'We use an electrolyser to convert excess electrical energy from the solar system through electrolysis, where the water is split into hydrogen and oxygen.\n\nThis occurs through the electrical charge being applied to the water, causing it to break the chemical bond between the hydrogen and oxygen atoms and produce particles called ions. The energy is then stored as hydrogen and the oxygen is released into the atmosphere.',

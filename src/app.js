@@ -39,7 +39,7 @@ gl.eventBus.on('loading.progress', ({ loaded, total }) => {
 })
 
 const onLoadingComlete = () => {
-  
+
   let ignoreInput = false
 
   const nav = new Nav({
@@ -50,8 +50,9 @@ const onLoadingComlete = () => {
   })
 
   const overlay = new Overlay({
-    onShowOverlay: () => {
-      ignoreInput = true
+    onShowOverlay: (at) => {
+      console.log('Overlay' + at);
+      if(at !== -1) ignoreInput = true;
       const event = `Screen ${gtagScreen + 4}a`
       gtag('event', event, {});
     },
@@ -72,7 +73,7 @@ const onLoadingComlete = () => {
     learnMore.updateProgress(progress)
 
     gl.onFrame(time)
-    
+
     if (gtagScreen != Math.round(progress)) {
       gtagScreen = Math.round(progress)
       const event = `Screen ${gtagScreen + 4}`
@@ -173,21 +174,21 @@ const onLoadingComlete = () => {
   const intro = () => {
     const preloader = document.getElementById('preloader')
     preloader.classList.add('transparent')
-  
+
     setTimeout(() => {
       preloader.parentNode.removeChild(preloader)
-  
+
       $centralLogo.classList.add('transparent')
-  
+
       document.querySelectorAll('.hide').forEach(node => reveal(node))
-  
+
       const o = document.querySelector('#central-logo-o')
       const oRect = o.getBoundingClientRect()
       gl.spawnAtomAt(oRect)
-  
+
       setTimeout(() => {
-        registerListeners()
-        updateScrollPosition(0)
+        registerListeners();
+        updateScrollPosition(0);
       }, 1000)
     }, 1000)
   }

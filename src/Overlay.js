@@ -1,11 +1,13 @@
-import { overlays } from './data'
-import { isMobileLayout } from './utils/layoutTest'
+import { overlays } from './data';
+import { isMobileLayout } from './utils/layoutTest';
+import { setCookie, getCookie } from './utils/Cookies';
 
 export class Overlay {
   constructor({
     onShowOverlay,
     onHideOverlay,
   }) {
+    this.initialOverlayOpenned = false;
     this.points = []
     overlays.forEach(overlay => {
       this.points[overlay.at] = overlay
@@ -45,7 +47,7 @@ export class Overlay {
       this.$closeButton.style.top = this.pointer.y + 'px'
     }
 
-    this.onShowOverlay()
+    this.onShowOverlay(this.data.at);
   }
 
   hide = () => {
@@ -79,6 +81,12 @@ export class Overlay {
 
   updateProgress = progress => {
     const rp = Math.round(progress)
+    // hiding initial overlay on scroll
+    if(this.initialOverlayOpenned && this.data.at == -1 && progress > 0 && progress < 0.1) {
+      this.hide();
+      setCookie('lavoInitialOverlayShown', 'true', 30);
+    }
+
     if (Math.abs(progress - rp) <= .25 && this.points[rp] !== undefined) {
       this.data = this.points[rp]
       if (!this.openButtonShown && !this.shown) {
@@ -89,6 +97,12 @@ export class Overlay {
         if (!isMobileLayout()) {
           this.$openButton.style.left = this.pointer.x + 'px'
           this.$openButton.style.top = this.pointer.y + 'px'
+        }
+
+        // showing initial overlay at the very beginning
+        if(!this.initialOverlayOpenned & getCookie('lavoInitialOverlayShown') !== 'true' & rp == -1) {
+          this.initialOverlayOpenned = true;
+          this.show();
         }
       }
     } else if (this.openButtonShown) {
