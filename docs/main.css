@@ -246,6 +246,8 @@ body {
   top: 65%;
   text-align: center;
   transition: 500ms opacity, 100ms transform;
+
+  transform: translateX(-50%);
 }
 
 .learn-more .cta__container {
